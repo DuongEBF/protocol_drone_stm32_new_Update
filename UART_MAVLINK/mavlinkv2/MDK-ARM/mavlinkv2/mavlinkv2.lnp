@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"mavlinkv2\startup_stm32f103xb.o"
+"mavlinkv2\main.o"
+"mavlinkv2\stm32f1xx_it.o"
+"mavlinkv2\stm32f1xx_hal_msp.o"
+"mavlinkv2\stm32f1xx_hal_gpio_ex.o"
+"mavlinkv2\stm32f1xx_hal_tim.o"
+"mavlinkv2\stm32f1xx_hal_tim_ex.o"
+"mavlinkv2\stm32f1xx_hal.o"
+"mavlinkv2\stm32f1xx_hal_rcc.o"
+"mavlinkv2\stm32f1xx_hal_rcc_ex.o"
+"mavlinkv2\stm32f1xx_hal_gpio.o"
+"mavlinkv2\stm32f1xx_hal_dma.o"
+"mavlinkv2\stm32f1xx_hal_cortex.o"
+"mavlinkv2\stm32f1xx_hal_pwr.o"
+"mavlinkv2\stm32f1xx_hal_flash.o"
+"mavlinkv2\stm32f1xx_hal_flash_ex.o"
+"mavlinkv2\stm32f1xx_hal_exti.o"
+"mavlinkv2\stm32f1xx_hal_uart.o"
+"mavlinkv2\system_stm32f1xx.o"
+"mavlinkv2\ring.o"
+--strict --scatter "mavlinkv2\mavlinkv2.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "mavlinkv2.map" -o mavlinkv2\mavlinkv2.axf

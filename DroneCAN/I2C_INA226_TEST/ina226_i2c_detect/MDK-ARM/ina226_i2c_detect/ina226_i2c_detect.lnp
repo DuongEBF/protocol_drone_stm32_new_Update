@@ -1,0 +1,28 @@
+--cpu=Cortex-M4.fp.sp
+"ina226_i2c_detect\startup_stm32f407xx.o"
+"ina226_i2c_detect\main.o"
+"ina226_i2c_detect\stm32f4xx_it.o"
+"ina226_i2c_detect\stm32f4xx_hal_msp.o"
+"ina226_i2c_detect\stm32f4xx_hal_i2c.o"
+"ina226_i2c_detect\stm32f4xx_hal_i2c_ex.o"
+"ina226_i2c_detect\stm32f4xx_hal_rcc.o"
+"ina226_i2c_detect\stm32f4xx_hal_rcc_ex.o"
+"ina226_i2c_detect\stm32f4xx_hal_flash.o"
+"ina226_i2c_detect\stm32f4xx_hal_flash_ex.o"
+"ina226_i2c_detect\stm32f4xx_hal_flash_ramfunc.o"
+"ina226_i2c_detect\stm32f4xx_hal_gpio.o"
+"ina226_i2c_detect\stm32f4xx_hal_dma_ex.o"
+"ina226_i2c_detect\stm32f4xx_hal_dma.o"
+"ina226_i2c_detect\stm32f4xx_hal_pwr.o"
+"ina226_i2c_detect\stm32f4xx_hal_pwr_ex.o"
+"ina226_i2c_detect\stm32f4xx_hal_cortex.o"
+"ina226_i2c_detect\stm32f4xx_hal.o"
+"ina226_i2c_detect\stm32f4xx_hal_exti.o"
+"ina226_i2c_detect\stm32f4xx_hal_tim.o"
+"ina226_i2c_detect\stm32f4xx_hal_tim_ex.o"
+"ina226_i2c_detect\system_stm32f4xx.o"
+"ina226_i2c_detect\ina226.o"
+--strict --scatter "ina226_i2c_detect\ina226_i2c_detect.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "ina226_i2c_detect.map" -o ina226_i2c_detect\ina226_i2c_detect.axf
