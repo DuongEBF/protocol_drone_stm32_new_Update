@@ -30,7 +30,7 @@
 #include <uavcan.protocol.HardwareVersion.h>
 #include <uavcan.equipment.power.BatteryInfo.h>
 #include <uavcan.protocol.debug.KeyValue.h>
-#include "INA226.h"
+#include "INA226_STM32_HAL.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +65,6 @@ static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
 uint8_t canard_memory_pool[1024];
 CanardInstance canard;
-INA226_Data_t ina_data;
 uint16_t count_resp = 0;
 uint16_t count_rx = 0;
 CAN_RxHeaderTypeDef rxHeader;
@@ -123,8 +122,8 @@ void on_reception(CanardInstance* ins, CanardRxTransfer* transfer)
 
 			if (strncmp((char*)req.key.data, "get_all", req.key.len) == 0) {
 					
-					float voltage = (float)ina_data.bus_voltage * 1.25f / 1000.0f;
-					float current = (float)ina_data.current * 1.0f / 1000.0f;  // Tùy calibration
+					float voltage = INA226_ReadBusVoltage();
+					float current = INA226_ReadCurrent();
 
 					struct uavcan_protocol_debug_KeyValue resp;
 					uint8_t buffer[UAVCAN_PROTOCOL_DEBUG_KEYVALUE_MAX_SIZE];
@@ -245,9 +244,13 @@ int main(void)
 				 should_accept,
 				 NULL);
 	canardSetLocalNodeID(&canard, 51);
-	INA226_Init(&hi2c1);
 	config_filter();
-	INA226_WriteCalibration(2048);
+	INA226_Begin(INA226_ADDRESS);
+	INA226_Configure((INA226_AVERAGES_16 << 9) | 
+                 (INA226_BUS_CONV_TIME_1100US << 6) | 
+                 (INA226_SHUNT_CONV_TIME_1100US << 3) | 
+                 INA226_MODE_SHUNT_BUS_CONT);
+	INA226_Calibrate(0.1f, 0.1f);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -255,7 +258,6 @@ int main(void)
   while (1)
   {
 		tx_frame();
-		INA226_ReadAll(&ina_data);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

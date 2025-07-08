@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../../Lib_INA226_STM32</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\..\..\LIB\Lib_INA226_STM32</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -512,17 +512,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>LIB_INA226_STM32</GroupName>
+          <GroupName>LIB</GroupName>
           <Files>
             <File>
               <FileName>INA226.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\Lib_INA226_STM32\INA226.c</FilePath>
+              <FilePath>..\..\..\LIB\Lib_INA226_STM32\INA226.c</FilePath>
             </File>
             <File>
               <FileName>INA226.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\Lib_INA226_STM32\INA226.h</FilePath>
+              <FilePath>..\..\..\LIB\Lib_INA226_STM32\INA226.h</FilePath>
             </File>
           </Files>
         </Group>

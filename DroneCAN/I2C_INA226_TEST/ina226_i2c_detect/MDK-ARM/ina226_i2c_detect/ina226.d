@@ -1,5 +1,5 @@
-ina226_i2c_detect/ina226.o: ..\..\Lib_INA226_STM32\INA226.c \
-  ..\..\Lib_INA226_STM32\INA226.h \
+ina226_i2c_detect/ina226.o: ..\..\..\LIB\Lib_INA226_STM32\INA226.c \
+  ..\..\..\LIB\Lib_INA226_STM32\INA226.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \

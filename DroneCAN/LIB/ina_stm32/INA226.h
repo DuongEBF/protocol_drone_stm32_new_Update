@@ -4,7 +4,7 @@
 #include "stdint.h"
 #include "main.h"
 
-#define INA226_ADDR  0x45
+#define INA226_ADDR  0x40
 #define INA226_REG_CONFIG      0x00
 #define INA226_REG_SHUNT       0x01
 #define INA226_REG_BUS         0x02

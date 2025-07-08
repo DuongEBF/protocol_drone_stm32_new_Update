@@ -65,7 +65,7 @@ float v;
 float i;
 uint16_t count_resp = 0;
 uint16_t count_rx = 0;
-
+static uint8_t tid = 0;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -225,7 +225,6 @@ int main(void)
 				 NULL);
 	canardSetLocalNodeID(&canard, 30);
 	config_filter();
-	static uint8_t tid = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -233,10 +232,10 @@ int main(void)
   while (1)
   {
 		static uint32_t last_req = 0;
-		if (HAL_GetTick() - last_req >= 3000) {
-				last_req = HAL_GetTick();
+		if (HAL_GetTick() - last_req >= 1000) {
 				request_all_from_node(51, &tid);
 				tid++;
+				last_req = HAL_GetTick();
 		}
 		tx_frame();
     /* USER CODE END WHILE */

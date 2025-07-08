@@ -125,7 +125,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	HAL_I2C_Init(&hi2c1);
 	INA226_Init(&hi2c1);
-	//I2C1_Scan();
+	I2C1_Scan();
   /* USER CODE END 2 */
 
   /* Infinite loop */

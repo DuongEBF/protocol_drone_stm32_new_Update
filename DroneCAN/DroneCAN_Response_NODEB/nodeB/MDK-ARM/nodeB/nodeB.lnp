@@ -23,11 +23,11 @@
 "nodeb\stm32f4xx_hal_tim_ex.o"
 "nodeb\system_stm32f4xx.o"
 "nodeb\canard.o"
-"nodeb\ina226.o"
 "nodeb\uavcan.equipment.power.batteryinfo.o"
 "nodeb\uavcan.protocol.debug.keyvalue.o"
 "nodeb\uavcan.protocol.getnodeinfo_res.o"
 "nodeb\uavcan.protocol.nodestatus.o"
+"nodeb\ina226_stm32_hal.o"
 --strict --scatter "nodeB\nodeB.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

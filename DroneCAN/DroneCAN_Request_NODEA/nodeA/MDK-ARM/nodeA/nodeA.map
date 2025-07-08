@@ -1200,17 +1200,17 @@ Image Symbol Table
     enqueueTxFrames                          0x08003039   Thumb Code   934  canard.o(.text.enqueueTxFrames)
     [Anonymous Symbol]                       0x08003038   Section        0  canard.o(.text.enqueueTxFrames)
     [Anonymous Symbol]                       0x080033e0   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x080035bc   Section        0  main.o(.text.on_reception)
-    [Anonymous Symbol]                       0x08003644   Section        0  main.o(.text.should_accept)
-    [Anonymous Symbol]                       0x0800366c   Section        0  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_decode)
-    [Anonymous Symbol]                       0x080036ec   Section        0  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_encode)
-    $v0                                      0x0800373a   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x0800373a   Section       26  fpinit.o(x$fpl$fpinit)
+    [Anonymous Symbol]                       0x080035b8   Section        0  main.o(.text.on_reception)
+    [Anonymous Symbol]                       0x08003640   Section        0  main.o(.text.should_accept)
+    [Anonymous Symbol]                       0x08003668   Section        0  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_decode)
+    [Anonymous Symbol]                       0x080036e8   Section        0  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_encode)
+    $v0                                      0x08003736   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x08003736   Section       26  fpinit.o(x$fpl$fpinit)
     .L_MergedGlobals                         0x20000000   Data           8  stm32f4xx_hal.o(.data..L_MergedGlobals)
     [Anonymous Symbol]                       0x20000000   Section        0  stm32f4xx_hal.o(.data..L_MergedGlobals)
     .bss                                     0x20000010   Section       96  libspace.o(.bss)
     .L_MergedGlobals                         0x20000070   Data         104  main.o(.bss..L_MergedGlobals)
-    main.tid                                 0x20000070   Data           1  main.o(.bss..L_MergedGlobals)
+    tid                                      0x20000070   Data           1  main.o(.bss..L_MergedGlobals)
     [Anonymous Symbol]                       0x20000070   Section        0  main.o(.bss..L_MergedGlobals)
     main.last_req                            0x20000080   Data           4  main.o(.bss..L_MergedGlobals)
     Heap_Mem                                 0x200004e0   Data         512  startup_stm32f407xx.o(HEAP)
@@ -1473,17 +1473,17 @@ Image Symbol Table
     canardRequestOrRespond                   0x080028c9   Thumb Code    64  canard.o(.text.canardRequestOrRespond)
     canardRequestOrRespondObj                0x08002909   Thumb Code   492  canard.o(.text.canardRequestOrRespondObj)
     canardSetLocalNodeID                     0x08002af5   Thumb Code    18  canard.o(.text.canardSetLocalNodeID)
-    main                                     0x080033e1   Thumb Code   476  main.o(.text.main)
-    on_reception                             0x080035bd   Thumb Code   120  main.o(.text.on_reception)
-    should_accept                            0x08003645   Thumb Code    40  main.o(.text.should_accept)
-    uavcan_protocol_debug_KeyValue_decode    0x0800366d   Thumb Code   128  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_decode)
-    uavcan_protocol_debug_KeyValue_encode    0x080036ed   Thumb Code    78  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_encode)
-    _fp_init                                 0x0800373b   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08003753   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08003753   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    AHBPrescTable                            0x08003754   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
-    Region$$Table$$Base                      0x08003764   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08003784   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x080033e1   Thumb Code   472  main.o(.text.main)
+    on_reception                             0x080035b9   Thumb Code   120  main.o(.text.on_reception)
+    should_accept                            0x08003641   Thumb Code    40  main.o(.text.should_accept)
+    uavcan_protocol_debug_KeyValue_decode    0x08003669   Thumb Code   128  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_decode)
+    uavcan_protocol_debug_KeyValue_encode    0x080036e9   Thumb Code    78  uavcan.protocol.debug.keyvalue.o(.text.uavcan_protocol_debug_KeyValue_encode)
+    _fp_init                                 0x08003737   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x0800374f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x0800374f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    AHBPrescTable                            0x08003750   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
+    Region$$Table$$Base                      0x08003760   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08003780   Number         0  anon$$obj.o(Region$$Table)
     uwTickFreq                               0x20000000   Data           1  stm32f4xx_hal.o(.data..L_MergedGlobals)
     uwTickPrio                               0x20000004   Data           4  stm32f4xx_hal.o(.data..L_MergedGlobals)
     SystemCoreClock                          0x20000008   Data           4  system_stm32f4xx.o(.data.SystemCoreClock)
@@ -1506,9 +1506,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003798, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003790, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00003784, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00003780, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1674,33 +1674,33 @@ Memory Map of the image
     0x08002c90   0x08002c90   0x000003a8   Code   RO          594    .text.crcAddSignature  canard.o
     0x08003038   0x08003038   0x000003a6   Code   RO          576    .text.enqueueTxFrames  canard.o
     0x080033de   0x080033de   0x00000002   PAD
-    0x080033e0   0x080033e0   0x000001dc   Code   RO           23    .text.main          main.o
-    0x080035bc   0x080035bc   0x00000088   Code   RO           17    .text.on_reception  main.o
-    0x08003644   0x08003644   0x00000028   Code   RO           15    .text.should_accept  main.o
-    0x0800366c   0x0800366c   0x00000080   Code   RO          632    .text.uavcan_protocol_debug_KeyValue_decode  uavcan.protocol.debug.keyvalue.o
-    0x080036ec   0x080036ec   0x0000004e   Code   RO          630    .text.uavcan_protocol_debug_KeyValue_encode  uavcan.protocol.debug.keyvalue.o
-    0x0800373a   0x0800373a   0x0000001a   Code   RO          794    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08003754   0x08003754   0x00000010   Data   RO          548    .rodata.AHBPrescTable  system_stm32f4xx.o
-    0x08003764   0x08003764   0x00000020   Data   RO          855    Region$$Table       anon$$obj.o
+    0x080033e0   0x080033e0   0x000001d8   Code   RO           23    .text.main          main.o
+    0x080035b8   0x080035b8   0x00000088   Code   RO           17    .text.on_reception  main.o
+    0x08003640   0x08003640   0x00000028   Code   RO           15    .text.should_accept  main.o
+    0x08003668   0x08003668   0x00000080   Code   RO          632    .text.uavcan_protocol_debug_KeyValue_decode  uavcan.protocol.debug.keyvalue.o
+    0x080036e8   0x080036e8   0x0000004e   Code   RO          630    .text.uavcan_protocol_debug_KeyValue_encode  uavcan.protocol.debug.keyvalue.o
+    0x08003736   0x08003736   0x0000001a   Code   RO          794    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08003750   0x08003750   0x00000010   Data   RO          548    .rodata.AHBPrescTable  system_stm32f4xx.o
+    0x08003760   0x08003760   0x00000020   Data   RO          855    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08003788, Size: 0x00000ae0, Max: 0x0001c000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08003780, Size: 0x00000ae0, Max: 0x0001c000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08003788   0x00000008   Data   RW          506    .data..L_MergedGlobals  stm32f4xx_hal.o
-    0x20000008   0x08003790   0x00000004   Data   RW          547    .data.SystemCoreClock  system_stm32f4xx.o
-    0x2000000c   0x08003794   0x00000004   PAD
+    0x20000000   0x08003780   0x00000008   Data   RW          506    .data..L_MergedGlobals  stm32f4xx_hal.o
+    0x20000008   0x08003788   0x00000004   Data   RW          547    .data.SystemCoreClock  system_stm32f4xx.o
+    0x2000000c   0x0800378c   0x00000004   PAD
     0x20000010        -       0x00000060   Zero   RW          720    .bss                c_w.l(libspace.o)
     0x20000070        -       0x00000068   Zero   RW           32    .bss..L_MergedGlobals  main.o
     0x200000d8        -       0x00000400   Zero   RW           30    .bss.canard_memory_pool  main.o
     0x200004d8        -       0x00000004   Zero   RW          505    .bss.uwTick         stm32f4xx_hal.o
-    0x200004dc   0x08003794   0x00000004   PAD
+    0x200004dc   0x0800378c   0x00000004   PAD
     0x200004e0        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f407xx.o
     0x200006e0        -       0x00000400   Zero   RW            1    STACK               startup_stm32f407xx.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x2001c000, Load base: 0x08003798, Size: 0x00000000, Max: 0x00004000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x2001c000, Load base: 0x08003790, Size: 0x00000000, Max: 0x00004000, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
@@ -1713,7 +1713,7 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
       7294          0          0          0          0      42972   canard.o
-       928         16          0          0       1128      10420   main.o
+       924         16          0          0       1128      10396   main.o
         64         26        392          0       1536        856   startup_stm32f407xx.o
        204          0          0          8          4       7305   stm32f4xx_hal.o
       1750          6          0          0          0      13843   stm32f4xx_hal_can.o
@@ -1726,7 +1726,7 @@ Image component sizes
        206          0          0          0          0       3167   uavcan.protocol.debug.keyvalue.o
 
     ----------------------------------------------------------------------
-     12750         48        440         12       2676     113873   Object Totals
+     12746         48        440         12       2676     113849   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         72          0          0          0          8          0   (incl. Padding)
 
@@ -1783,15 +1783,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     13772         64        440         12       2772     114377   Grand Totals
-     13772         64        440         12       2772     114377   ELF Image Totals
-     13772         64        440         12          0          0   ROM Totals
+     13768         64        440         12       2772     114353   Grand Totals
+     13768         64        440         12       2772     114353   ELF Image Totals
+     13768         64        440         12          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                14212 (  13.88kB)
+    Total RO  Size (Code + RO Data)                14208 (  13.88kB)
     Total RW  Size (RW Data + ZI Data)              2784 (   2.72kB)
-    Total ROM Size (Code + RO Data + RW Data)      14224 (  13.89kB)
+    Total ROM Size (Code + RO Data + RW Data)      14220 (  13.89kB)
 
 ==============================================================================
 

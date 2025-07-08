@@ -1,4 +1,7 @@
-nodeb/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
+nodeb/ina226_stm32_hal.o: \
+  ..\..\..\LIB\Lib_INA226_STM32\INA226_STM32_HAL.c \
+  ..\..\..\LIB\Lib_INA226_STM32\INA226_STM32_HAL.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h \
   ..\Core\Inc\stm32f4xx_hal_conf.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h \
@@ -6,7 +9,6 @@ nodeb/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h \
   ..\Drivers\CMSIS\Include\core_cm4.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
   ..\Drivers\CMSIS\Include\cmsis_version.h \
   ..\Drivers\CMSIS\Include\cmsis_compiler.h \
   ..\Drivers\CMSIS\Include\cmsis_armclang.h \
@@ -31,15 +33,4 @@ nodeb/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h \
-  ..\..\..\LIB\canard\canard.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\assert.h \
-  ..\..\..\LIB\canard\canard_internals.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\..\..\LIB\Lib_canard_func\include\uavcan.protocol.NodeStatus.h \
-  ..\..\..\LIB\Lib_canard_func\include\uavcan.protocol.GetNodeInfo_res.h \
-  ..\..\..\LIB\Lib_canard_func\include\uavcan.protocol.HardwareVersion.h \
-  ..\..\..\LIB\Lib_canard_func\include\uavcan.protocol.SoftwareVersion.h \
-  ..\..\..\LIB\Lib_canard_func\include\uavcan.equipment.power.BatteryInfo.h \
-  ..\..\..\LIB\Lib_canard_func\include\uavcan.protocol.debug.KeyValue.h \
-  ..\..\..\LIB\Lib_INA226_STM32\INA226_STM32_HAL.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h

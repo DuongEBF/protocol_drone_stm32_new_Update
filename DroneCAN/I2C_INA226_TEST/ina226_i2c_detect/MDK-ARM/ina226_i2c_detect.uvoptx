@@ -188,7 +188,7 @@
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>cfg,0x0A</ItemText>
+          <ItemText>cfg,0x10</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
@@ -550,7 +550,7 @@
   </Group>
 
   <Group>
-    <GroupName>LIB_INA226_STM32</GroupName>
+    <GroupName>LIB</GroupName>
     <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
@@ -562,7 +562,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\Lib_INA226_STM32\INA226.c</PathWithFileName>
+      <PathWithFileName>..\..\..\LIB\Lib_INA226_STM32\INA226.c</PathWithFileName>
       <FilenameWithoutPath>INA226.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -574,7 +574,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\Lib_INA226_STM32\INA226.h</PathWithFileName>
+      <PathWithFileName>..\..\..\LIB\Lib_INA226_STM32\INA226.h</PathWithFileName>
       <FilenameWithoutPath>INA226.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
