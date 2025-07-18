@@ -1,0 +1,57 @@
+{
+  "version": "3.4.0",
+  "design_name": "Hyp_Joysticks",
+  "magnet_id": 1,
+  "poles": 2,
+  "material_id": 1,
+  "grade_id": 1,
+  "select_remanence": "br_average",
+  "remanence": 1200,
+  "temperature": 20,
+  "temperature_coefficient": -0.12,
+  "coercivity": 10.9,
+  "function_id": 3,
+  "magnet_geometry": {
+    "magnet_length_x_dim": 1,
+    "magnet_length_y_dim": 1,
+    "magnet_length_z_dim": 2.5
+  },
+  "magnet_position": {
+    "x_position": 0,
+    "y_position": 0,
+    "z_position": -1.6
+  },
+  "magnet_angle": {
+    "x_angle": 90,
+    "y_angle": 0,
+    "z_angle": 90
+  },
+  "magnet_movement": {
+    "tilt_angle": -30,
+    "xy_angle": 0
+  },
+  "sim_setting": {
+    "tilt_angle_step_size": 1
+  },
+  "sensor": [
+    {
+      "sensor_id": "TMAG5253",
+      "sensor_position": {
+        "x_position": 0,
+        "y_position": 0,
+        "z_position": -3.5
+      },
+      "sensor_angle": {
+        "x_angle": 0,
+        "y_angle": 0,
+        "z_angle": 0
+      },
+      "custom_inputs": {
+        "variant": "TMAG5253BA3IQDMRR",
+        "applied_vcc": 3.3
+      },
+      "id": 29067,
+      "user_design": 41801
+    }
+  ]
+}

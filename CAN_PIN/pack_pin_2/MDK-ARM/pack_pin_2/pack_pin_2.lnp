@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"pack_pin_2\startup_stm32f103xb.o"
+"pack_pin_2\main.o"
+"pack_pin_2\stm32f1xx_it.o"
+"pack_pin_2\stm32f1xx_hal_msp.o"
+"pack_pin_2\stm32f1xx_hal_gpio_ex.o"
+"pack_pin_2\stm32f1xx_hal_can.o"
+"pack_pin_2\stm32f1xx_hal.o"
+"pack_pin_2\stm32f1xx_hal_rcc.o"
+"pack_pin_2\stm32f1xx_hal_rcc_ex.o"
+"pack_pin_2\stm32f1xx_hal_gpio.o"
+"pack_pin_2\stm32f1xx_hal_dma.o"
+"pack_pin_2\stm32f1xx_hal_cortex.o"
+"pack_pin_2\stm32f1xx_hal_pwr.o"
+"pack_pin_2\stm32f1xx_hal_flash.o"
+"pack_pin_2\stm32f1xx_hal_flash_ex.o"
+"pack_pin_2\stm32f1xx_hal_exti.o"
+"pack_pin_2\stm32f1xx_hal_tim.o"
+"pack_pin_2\stm32f1xx_hal_tim_ex.o"
+"pack_pin_2\system_stm32f1xx.o"
+"pack_pin_2\canard.o"
+"pack_pin_2\uavcan.protocol.getnodeinfo_res.o"
+"pack_pin_2\uavcan.protocol.nodestatus.o"
+"pack_pin_2\uavcan.equipment.power.batteryinfo.o"
+--strict --scatter "pack_pin_2\pack_pin_2.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "pack_pin_2.map" -o pack_pin_2\pack_pin_2.axf

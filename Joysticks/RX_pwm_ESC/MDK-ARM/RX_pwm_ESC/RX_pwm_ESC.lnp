@@ -1,0 +1,28 @@
+--cpu=Cortex-M4.fp.sp
+"rx_pwm_esc\startup_stm32f407xx.o"
+"rx_pwm_esc\main.o"
+"rx_pwm_esc\stm32f4xx_it.o"
+"rx_pwm_esc\stm32f4xx_hal_msp.o"
+"rx_pwm_esc\stm32f4xx_hal_tim.o"
+"rx_pwm_esc\stm32f4xx_hal_tim_ex.o"
+"rx_pwm_esc\stm32f4xx_hal_rcc.o"
+"rx_pwm_esc\stm32f4xx_hal_rcc_ex.o"
+"rx_pwm_esc\stm32f4xx_hal_flash.o"
+"rx_pwm_esc\stm32f4xx_hal_flash_ex.o"
+"rx_pwm_esc\stm32f4xx_hal_flash_ramfunc.o"
+"rx_pwm_esc\stm32f4xx_hal_gpio.o"
+"rx_pwm_esc\stm32f4xx_hal_dma_ex.o"
+"rx_pwm_esc\stm32f4xx_hal_dma.o"
+"rx_pwm_esc\stm32f4xx_hal_pwr.o"
+"rx_pwm_esc\stm32f4xx_hal_pwr_ex.o"
+"rx_pwm_esc\stm32f4xx_hal_cortex.o"
+"rx_pwm_esc\stm32f4xx_hal.o"
+"rx_pwm_esc\stm32f4xx_hal_exti.o"
+"rx_pwm_esc\stm32f4xx_hal_uart.o"
+"rx_pwm_esc\system_stm32f4xx.o"
+"rx_pwm_esc\ring.o"
+"rx_pwm_esc\mavlink_rx.o"
+--strict --scatter "RX_pwm_ESC\RX_pwm_ESC.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "RX_pwm_ESC.map" -o RX_pwm_ESC\RX_pwm_ESC.axf
