@@ -33,6 +33,7 @@
 #include "stdio.h" 
 #include "stdbool.h"
 #include "string.h"
+#include "bq40z50.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,19 +54,28 @@
 /* Private variables ---------------------------------------------------------*/
 CAN_HandleTypeDef hcan;
 
+I2C_HandleTypeDef hi2c1;
+
 /* USER CODE BEGIN PV */
 uint8_t canard_memory_pool[1024];
 CanardInstance canard;
 
 uint8_t heartbeat_tid = 0;
 uint8_t battery_tid = 0;
+
+infor_bq40z50_t infor_pack;
+
+HAL_StatusTypeDef status;
+HAL_I2C_StateTypeDef statt;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_CAN_Init(void);
+static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
+
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
     CAN_RxHeaderTypeDef rxHeader;
@@ -84,6 +94,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
         canardHandleRxFrame(&canard, &frame, HAL_GetTick() * 1000ULL);
     }
 }
+
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -93,7 +105,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 bool should_accept(const CanardInstance* ins, uint64_t* out_sig, uint16_t data_type_id,
                    CanardTransferType transfer_type, uint8_t source_node_id) 
 {	
-    if (data_type_id == UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_ID && transfer_type == CanardTransferTypeRequest) 
+if (data_type_id == UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_ID && transfer_type == CanardTransferTypeRequest) 
 		{
         *out_sig = UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_SIGNATURE;
         return true;
@@ -102,43 +114,43 @@ bool should_accept(const CanardInstance* ins, uint64_t* out_sig, uint16_t data_t
 }
 void on_reception(CanardInstance* ins, CanardRxTransfer* transfer)
 {
-    if (transfer->data_type_id == UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_ID &&
-        transfer->transfer_type == CanardTransferTypeRequest)
-    {
-        struct uavcan_protocol_GetNodeInfoResponse resp;
-        memset(&resp, 0, sizeof(resp));
+	if (transfer->data_type_id == UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_ID &&
+			transfer->transfer_type == CanardTransferTypeRequest)
+	{
+		struct uavcan_protocol_GetNodeInfoResponse resp;
+		memset(&resp, 0, sizeof(resp));
 
-        const char* node_name = "75";
+		const char* node_name = "75";
 
-        resp.status.uptime_sec = HAL_GetTick() / 1000;
-        resp.status.health = UAVCAN_PROTOCOL_NODESTATUS_HEALTH_OK;
-        resp.status.mode = UAVCAN_PROTOCOL_NODESTATUS_MODE_OPERATIONAL;
-        resp.status.sub_mode = 0;
-        resp.status.vendor_specific_status_code = 0;
+		resp.status.uptime_sec = HAL_GetTick() / 1000;
+		resp.status.health = UAVCAN_PROTOCOL_NODESTATUS_HEALTH_OK;
+		resp.status.mode = UAVCAN_PROTOCOL_NODESTATUS_MODE_OPERATIONAL;
+		resp.status.sub_mode = 0;
+		resp.status.vendor_specific_status_code = 0;
 
-        resp.software_version.major = 1;
-        resp.software_version.minor = 0;
-        resp.hardware_version.major = 1;
-        resp.hardware_version.minor = 0;
+		resp.software_version.major = 1;
+		resp.software_version.minor = 0;
+		resp.hardware_version.major = 1;
+		resp.hardware_version.minor = 0;
 
-        resp.name.len = strlen(node_name);
-        memcpy(resp.name.data, node_name, resp.name.len);
+		resp.name.len = strlen(node_name);
+		memcpy(resp.name.data, node_name, resp.name.len);
 
-        uint8_t buffer[UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_MAX_SIZE] = {0};
-        uint32_t len = uavcan_protocol_GetNodeInfoResponse_encode(&resp, buffer);
+		uint8_t buffer[UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_MAX_SIZE] = {0};
+		uint32_t len = uavcan_protocol_GetNodeInfoResponse_encode(&resp, buffer);
 
-        uint8_t tid = transfer->transfer_id;
-        canardRequestOrRespond(ins,
-            transfer->source_node_id,
-            UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_SIGNATURE,
-            UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_ID,
-            &tid,
-            CANARD_TRANSFER_PRIORITY_LOW,
-            CanardResponse,
-            buffer,
-            len
-        );
-    }
+		uint8_t tid = transfer->transfer_id;
+		canardRequestOrRespond(ins,
+				transfer->source_node_id,
+				UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_SIGNATURE,
+				UAVCAN_PROTOCOL_GETNODEINFO_RESPONSE_ID,
+				&tid,
+				CANARD_TRANSFER_PRIORITY_LOW,
+				CanardResponse,
+				buffer,
+				len
+		);
+	}
 }
 
 void tx_frame(void)
@@ -148,23 +160,23 @@ void tx_frame(void)
 	{
 			if (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) > 0)
 			{
-					CAN_TxHeaderTypeDef txHeader;
-					memset(&txHeader, 0, sizeof(txHeader));
-					txHeader.IDE = CAN_ID_EXT;
-					txHeader.ExtId = txf->id & 0x1FFFFFFF;
-					txHeader.RTR = CAN_RTR_DATA;
-					txHeader.DLC = txf->data_len;
-					txHeader.TransmitGlobalTime = DISABLE;
+				CAN_TxHeaderTypeDef txHeader;
+				memset(&txHeader, 0, sizeof(txHeader));
+				txHeader.IDE = CAN_ID_EXT;
+				txHeader.ExtId = txf->id & 0x1FFFFFFF;
+				txHeader.RTR = CAN_RTR_DATA;
+				txHeader.DLC = txf->data_len;
+				txHeader.TransmitGlobalTime = DISABLE;
 
-					uint32_t txMailbox;
-					if (HAL_CAN_AddTxMessage(&hcan, &txHeader, (uint8_t*)txf->data, &txMailbox) == HAL_OK)
-					{
-							canardPopTxQueue(&canard);
-					}
-					else
-					{
-							break; 
-					}
+				uint32_t txMailbox;
+				if (HAL_CAN_AddTxMessage(&hcan, &txHeader, (uint8_t*)txf->data, &txMailbox) == HAL_OK)
+				{
+						canardPopTxQueue(&canard);
+				}
+				else
+				{
+						break; 
+				}
 			}
 			else
 			{
@@ -190,44 +202,41 @@ void send_heartbeat(CanardInstance* ins, uint8_t* transfer_id)
         UAVCAN_PROTOCOL_NODESTATUS_SIGNATURE,
         UAVCAN_PROTOCOL_NODESTATUS_ID,
         transfer_id,
-        CANARD_TRANSFER_PRIORITY_LOW,
+CANARD_TRANSFER_PRIORITY_LOW,
         buffer,
         len
     );
 }
 void send_battery_info(void)
 {
-    struct uavcan_equipment_power_BatteryInfo msg = {0};
+	struct uavcan_equipment_power_BatteryInfo msg = {0};
+	const char* name = "hypmotion_pack_pin_2";
+	msg.temperature =   infor_pack.temperature_celsius; // float
+	msg.voltage = infor_pack.volt;      // float
+	msg.current = infor_pack.current;           // float
+	msg.state_of_charge_pct = infor_pack.soc;         // uint8_t (0-100)
+	msg.state_of_health_pct = 100;
+	msg.status_flags = 0;
 
-    // Tùy pack mà gán dúng tên:
-    const char* name = "hypmotion_pack_pin_2"; // ho?c _2, _3 tùy chip
-    msg.temperature =   25; // float
-    msg.voltage =   26.211;      // float
-    msg.current = 2.124;           // float
-    msg.state_of_charge_pct = 54;         // uint8_t (0-100)
-    msg.state_of_health_pct = 100;                // ho?c tính n?u có
-    msg.status_flags = 0;                         // Xem hdsd d? báo tr?ng thái
+	msg.model_name.len = strlen(name);
+	memcpy(msg.model_name.data, name, msg.model_name.len);
 
-    msg.model_name.len = strlen(name);
-    memcpy(msg.model_name.data, name, msg.model_name.len);
 
-    // ... gán các tru?ng còn l?i n?u mu?n, ho?c d? = 0
+	uint8_t buffer[UAVCAN_EQUIPMENT_POWER_BATTERYINFO_MAX_SIZE];
+	uint32_t len = uavcan_equipment_power_BatteryInfo_encode(&msg, buffer);
 
-    uint8_t buffer[UAVCAN_EQUIPMENT_POWER_BATTERYINFO_MAX_SIZE];
-    uint32_t len = uavcan_equipment_power_BatteryInfo_encode(&msg, buffer);
-
-    canardBroadcast(&canard,
-        UAVCAN_EQUIPMENT_POWER_BATTERYINFO_SIGNATURE,
-        UAVCAN_EQUIPMENT_POWER_BATTERYINFO_ID,
-        &battery_tid,
-        CANARD_TRANSFER_PRIORITY_LOW,
-        buffer,
-        len
-    );
+	canardBroadcast(&canard,
+		UAVCAN_EQUIPMENT_POWER_BATTERYINFO_SIGNATURE,
+		UAVCAN_EQUIPMENT_POWER_BATTERYINFO_ID,
+		&battery_tid,
+		CANARD_TRANSFER_PRIORITY_LOW,
+		buffer,
+		len
+	);
 }
 void filer_config(void)
 {
-		//------------filer-------------//
+	//------------filer-------------//
 	CAN_FilterTypeDef sFilterConfig;
 	sFilterConfig.FilterBank = 0;
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
@@ -240,6 +249,9 @@ void filer_config(void)
 	sFilterConfig.FilterActivation = ENABLE;
 	HAL_CAN_ConfigFilter(&hcan, &sFilterConfig);
 }
+
+
+
 /* USER CODE END 0 */
 
 /**
@@ -271,6 +283,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CAN_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 	HAL_CAN_Start(&hcan);
 	HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
@@ -282,13 +295,16 @@ int main(void)
            NULL);
 	canardSetLocalNodeID(&canard, 12);
 	filer_config();
+	BQ40Z50_Init(&hi2c1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		statt = HAL_I2C_GetState(&hi2c1);
 		tx_frame();
+		status = BQ40Z50_ReadAll(&infor_pack);
 		static uint32_t last_hb = 0;
 		if(HAL_GetTick() - last_hb >= 1000)
 		{
@@ -385,6 +401,40 @@ static void MX_CAN_Init(void)
 }
 
 /**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.ClockSpeed = 100000;
+  hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -397,6 +447,7 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

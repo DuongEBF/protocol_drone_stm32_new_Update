@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.equipment.esc.RawCommand.h:55:6:_uavcan_equipment_esc_RawCommand_encode	3
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.equipment.esc.RawCommand.h:102:6:_uavcan_equipment_esc_RawCommand_decode	4
+../LIB/Lib_canard_func/src/uavcan.equipment.esc.RawCommand.c:12:10:uavcan_equipment_esc_RawCommand_encode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.esc.RawCommand.c:32:6:uavcan_equipment_esc_RawCommand_decode	2

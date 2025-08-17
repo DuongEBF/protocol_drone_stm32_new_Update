@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.GetNodeInfo_req.h:51:6:_uavcan_protocol_GetNodeInfoRequest_encode	24	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.GetNodeInfo_req.h:67:6:_uavcan_protocol_GetNodeInfoRequest_decode	24	static
+../LIB/Lib_canard_func/src/uavcan.protocol.GetNodeInfo_req.c:14:10:uavcan_protocol_GetNodeInfoRequest_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.protocol.GetNodeInfo_req.c:34:6:uavcan_protocol_GetNodeInfoRequest_decode	24	static

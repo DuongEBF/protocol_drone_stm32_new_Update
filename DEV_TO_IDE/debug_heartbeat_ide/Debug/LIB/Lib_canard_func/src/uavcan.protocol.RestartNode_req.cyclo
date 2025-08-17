@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.RestartNode_req.h:59:6:_uavcan_protocol_RestartNodeRequest_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.RestartNode_req.h:84:6:_uavcan_protocol_RestartNodeRequest_decode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.RestartNode_req.c:14:10:uavcan_protocol_RestartNodeRequest_encode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.RestartNode_req.c:34:6:uavcan_protocol_RestartNodeRequest_decode	2

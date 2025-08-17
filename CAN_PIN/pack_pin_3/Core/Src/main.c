@@ -105,7 +105,7 @@ void on_reception(CanardInstance* ins, CanardRxTransfer* transfer)
         struct uavcan_protocol_GetNodeInfoResponse resp;
         memset(&resp, 0, sizeof(resp));
 
-        const char* node_name = "56";
+        const char* node_name = "50";
 
         resp.status.uptime_sec = HAL_GetTick() / 1000;
         resp.status.health = UAVCAN_PROTOCOL_NODESTATUS_HEALTH_OK;
@@ -162,15 +162,14 @@ void send_heartbeat(CanardInstance* ins, uint8_t* transfer_id)
 void send_battery_info(void)
 {
     struct uavcan_equipment_power_BatteryInfo msg = {0};
-
-    // Tùy pack mà gán dúng tên:
-    const char* name = "hypmotion_pack_pin_3"; // ho?c _2, _3 tùy chip
-    msg.temperature =  25;  // float
-    msg.voltage =   12.222;      // float
-    msg.current = 4.555;           // float
-    msg.state_of_charge_pct = 44;         // uint8_t (0-100)
-    msg.state_of_health_pct = 100;                // ho?c tính n?u có
-    msg.status_flags = 0;                         // Xem hdsd d? báo tr?ng thái
+		
+    const char* name = "hypmotion_pack_pin_3";
+    msg.temperature =  30;  // float
+    msg.voltage =   15.211;      // float
+    msg.current = 5.124;           // float
+    msg.state_of_charge_pct = 89;         // uint8_t (0-100)
+    msg.state_of_health_pct = 100;
+    msg.status_flags = 0;
 
     msg.model_name.len = strlen(name);
     memcpy(msg.model_name.data, name, msg.model_name.len);
@@ -323,11 +322,12 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 8;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;

@@ -1,0 +1,6 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.tunnel.Protocol.h:55:6:_uavcan_tunnel_Protocol_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.tunnel.Protocol.h:80:6:_uavcan_tunnel_Protocol_decode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.tunnel.Call_req.h:65:6:_uavcan_tunnel_CallRequest_encode	3
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.tunnel.Call_req.h:127:6:_uavcan_tunnel_CallRequest_decode	5
+../LIB/Lib_canard_func/src/uavcan.tunnel.Call_req.c:14:10:uavcan_tunnel_CallRequest_encode	1
+../LIB/Lib_canard_func/src/uavcan.tunnel.Call_req.c:34:6:uavcan_tunnel_CallRequest_decode	2

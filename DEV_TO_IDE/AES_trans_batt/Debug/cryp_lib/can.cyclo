@@ -1,0 +1,8 @@
+../cryp_lib/can.c:24:6:HAL_CAN_RxFifo0MsgPendingCallback	3
+../cryp_lib/can.c:41:6:tx_frame	4
+../cryp_lib/can.c:73:13:config_filter	1
+../cryp_lib/can.c:88:13:should_accept	3
+../cryp_lib/can.c:108:13:on_reception	3
+../cryp_lib/can.c:122:13:send_payload_batt_aes	2
+../cryp_lib/can.c:152:6:can_init	1
+../cryp_lib/can.c:167:6:can_handle	2

@@ -1,0 +1,4 @@
+../App/mixer.c:6:7:clamp	24	static
+../App/mixer.c:13:6:mixer_output	32	static
+../App/mixer.c:34:6:mixer_handle	4	static
+../App/mixer.c:41:6:mixer_init	16	static

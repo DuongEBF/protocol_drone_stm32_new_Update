@@ -1,0 +1,15 @@
+/*
+ * mavlink_from_FC.h
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+
+#ifndef LED_CONTROLL_MAVLINK_FROM_FC_H_
+#define LED_CONTROLL_MAVLINK_FROM_FC_H_
+
+void mavlink_init(void);
+
+
+
+#endif /* LED_CONTROLL_MAVLINK_FROM_FC_H_ */

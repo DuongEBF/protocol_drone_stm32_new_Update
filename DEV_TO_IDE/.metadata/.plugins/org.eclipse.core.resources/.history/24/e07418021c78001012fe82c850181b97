@@ -1,0 +1,18 @@
+/*
+ * uart_irq.h
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+
+#ifndef UART_IRQ_UART_IRQ_H_
+#define UART_IRQ_UART_IRQ_H_
+#include "main.h"
+extern UART_HandleTypeDef huart3;
+extern UART_HandleTypeDef huart2;
+extern uint8_t data_rx_fc;
+extern uint8_t data_rx_tobufi;
+
+
+
+#endif /* UART_IRQ_UART_IRQ_H_ */

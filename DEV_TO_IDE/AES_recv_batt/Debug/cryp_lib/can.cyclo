@@ -1,0 +1,8 @@
+../cryp_lib/can.c:34:6:HAL_FDCAN_RxFifo0Callback	4
+../cryp_lib/can.c:54:13:config_fdcan_filter_all	3
+../cryp_lib/can.c:81:13:FDCan_tx_frame	4
+../cryp_lib/can.c:114:13:handle_AES_Allocation	3
+../cryp_lib/can.c:135:13:should_accept	3
+../cryp_lib/can.c:155:13:on_reception	3
+../cryp_lib/can.c:169:6:fdcan_init	1
+../cryp_lib/can.c:189:6:fdcan_handle	1

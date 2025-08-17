@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.CANIfaceStats.h:53:6:_uavcan_protocol_CANIfaceStats_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.CANIfaceStats.h:96:6:_uavcan_protocol_CANIfaceStats_decode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.CANIfaceStats.c:12:10:uavcan_protocol_CANIfaceStats_encode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.CANIfaceStats.c:32:6:uavcan_protocol_CANIfaceStats_decode	2

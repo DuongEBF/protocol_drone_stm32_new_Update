@@ -1,0 +1,4 @@
+../UART_IRQ/ring_buff.c:8:6:ring_buffer_init	1
+../UART_IRQ/ring_buff.c:17:8:ring_buffer_push	3
+../UART_IRQ/ring_buff.c:33:10:ring_buffer_available	2
+../UART_IRQ/ring_buff.c:41:8:ring_buffer_pop	3

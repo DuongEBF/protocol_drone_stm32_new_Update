@@ -1,0 +1,35 @@
+/*
+ * mavlink_from_FC.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "mavlink_from_FC.h"
+#include "mavlink.h"
+#include "uart.h"
+extern UART_HandleTypeDef huart3;
+uint8_t data_rx;
+
+
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance == USART3)
+	{
+		receive_rx(data_rx);
+		HAL_UART_Receive_IT(huart, &data_rx, 1);
+	}
+}
+
+void mavlink_process(uint32_t now)
+{
+
+}
+
+
+
+void mavlink_init(void)
+{
+	uart_init();
+	HAL_UART_Receive_IT(&huart3, &data_rx, 1);
+}

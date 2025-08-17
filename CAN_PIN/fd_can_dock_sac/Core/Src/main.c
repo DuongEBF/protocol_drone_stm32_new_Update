@@ -290,8 +290,8 @@ void on_reception(CanardInstance* ins, CanardRxTransfer* transfer)
 					packs[i].current = msg.current;
 					packs[i].soc = msg.state_of_charge_pct;
 					packs[i].temp = msg.temperature;
-					packs[i].last_update = HAL_GetTick();  // c?p nh?t th?i di?m nh?n cu?i
-					packs[i].online = 1;                   // dang k?t n?i
+					packs[i].last_update = HAL_GetTick();  // cap nhat thoi diem
+					packs[i].online = 1;                   // dang ket noi
 				}
 			}
 		}
@@ -425,7 +425,7 @@ void check_pack_online(void)
 		if (packs[i].online && (now - packs[i].last_update > 500))
 		{
 			packs[i].online = 0;
-			packs[i].soc = 0; // reset de loai khoi danh sach sac
+			packs[i].soc = 0; // reset de loai khoi danh sach sach
 		}
 	}
 }

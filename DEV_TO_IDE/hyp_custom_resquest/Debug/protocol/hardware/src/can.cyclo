@@ -1,0 +1,9 @@
+../protocol/hardware/src/can.c:8:6:HAL_CAN_RxFifo0MsgPendingCallback	3
+../protocol/hardware/src/can.c:24:6:should_accept	3
+../protocol/hardware/src/can.c:35:6:on_reception	4
+../protocol/hardware/src/can.c:50:13:send_heartbeat	1
+../protocol/hardware/src/can.c:75:13:send_batteryinfo_request	1
+../protocol/hardware/src/can.c:102:13:tx_frame	4
+../protocol/hardware/src/can.c:134:13:config_filter	1
+../protocol/hardware/src/can.c:148:6:Can_Init	1
+../protocol/hardware/src/can.c:180:6:Can_Handle	3

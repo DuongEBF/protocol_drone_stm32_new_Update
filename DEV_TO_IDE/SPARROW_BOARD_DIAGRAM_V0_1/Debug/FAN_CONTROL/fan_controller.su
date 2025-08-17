@@ -1,0 +1,5 @@
+../FAN_CONTROL/fan_controller.c:18:20:fan_set_percent	32	static
+../FAN_CONTROL/fan_controller.c:28:21:clampf	24	static
+../FAN_CONTROL/fan_controller.c:32:9:fan_ctrl_limit	32	static
+../FAN_CONTROL/fan_controller.c:78:6:fan_controller_init	16	static
+../FAN_CONTROL/fan_controller.c:85:6:fan_controller_process	24	static

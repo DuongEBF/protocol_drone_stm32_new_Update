@@ -25,6 +25,7 @@ pack_pin_2/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h \
+  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_i2c.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pwr.h \
   ..\LIB\canard\canard.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
@@ -37,4 +38,5 @@ pack_pin_2/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\LIB\Lib_canard_func\include\uavcan.protocol.SoftwareVersion.h \
   ..\LIB\Lib_canard_func\include\uavcan.equipment.power.BatteryInfo.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  ..\LIB\lib_bq40z50\bq40z50.h

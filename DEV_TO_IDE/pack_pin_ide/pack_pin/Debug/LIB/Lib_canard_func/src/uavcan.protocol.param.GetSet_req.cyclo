@@ -1,0 +1,8 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.param.Empty.h:41:6:_uavcan_protocol_param_Empty_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.param.Empty.h:57:6:_uavcan_protocol_param_Empty_decode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.param.Value.h:80:6:_uavcan_protocol_param_Value_encode	8
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.param.Value.h:205:6:_uavcan_protocol_param_Value_decode	11
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.param.GetSet_req.h:65:6:_uavcan_protocol_param_GetSetRequest_encode	3
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.param.GetSet_req.h:127:6:_uavcan_protocol_param_GetSetRequest_decode	5
+../LIB/Lib_canard_func/src/uavcan.protocol.param.GetSet_req.c:14:10:uavcan_protocol_param_GetSetRequest_encode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.param.GetSet_req.c:34:6:uavcan_protocol_param_GetSetRequest_decode	2

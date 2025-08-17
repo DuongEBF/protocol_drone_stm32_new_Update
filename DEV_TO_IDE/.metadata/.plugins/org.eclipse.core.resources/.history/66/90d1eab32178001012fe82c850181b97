@@ -1,0 +1,57 @@
+/*
+ * pid_controller.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "pid_controller.h"
+#include "mavlink_from_tobufi.h"
+TIM_HandleTypeDef* pwmfan;
+mavlink_from_tobufi_t pPID;
+#define HILIM 0
+#define LOLIM 100
+#define Kp 2
+#define Kb 3
+#define Ki 0.2
+const float sampleTime = 0.1;
+uint8_t PI_temp_Ctrl(float setpoint_temp, float current_temp)
+{
+	static float ui_p = 0;
+	static float e_reset;
+	float err, up, ui,err_windup;
+	float uout;
+	float uout0;
+	int piout;
+
+	err = setpoint_temp - current_temp;
+	up = Kp*err;
+	err_windup = Ki*err + Kb*e_reset;
+	ui = ui_p + err_windup*sampleTime;
+
+	ui_p = ui;
+	uout = up+ui;
+
+	if(uout > HILIM)
+		uout0 = HILIM;
+	else if(uout < LOLIM)
+		uout0 = LOLIM;
+	else
+		uout0 = uout;
+
+	e_reset = uout0 - uout;
+	piout = (uint8_t)uout0;
+	return piout;
+}
+void pid_controller_init(TIM_HandleTypeDef* tim3)
+{
+	tim3 = pwmfan;
+	mavlink_init_tbf();
+	HAL_TIM_PWM_Start(pwmfan, TIM_CHANNEL_4);
+}
+
+void pid_controller_process(void)
+{
+	mavlink_process_tbf(&pPID, HAL_GetTick());
+	uint8_t pwm = PI_temp_Ctrl(50, pPID.char_infor.temperature);
+	__HAL_TIM_SET_COMPARE(pwmfan, TIM_CHANNEL_4, pwm);
+}

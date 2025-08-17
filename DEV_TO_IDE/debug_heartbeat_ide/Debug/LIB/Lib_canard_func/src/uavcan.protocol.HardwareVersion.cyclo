@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.HardwareVersion.h:57:6:_uavcan_protocol_HardwareVersion_encode	4
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.HardwareVersion.h:139:6:_uavcan_protocol_HardwareVersion_decode	4
+../LIB/Lib_canard_func/src/uavcan.protocol.HardwareVersion.c:12:10:uavcan_protocol_HardwareVersion_encode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.HardwareVersion.c:32:6:uavcan_protocol_HardwareVersion_decode	2

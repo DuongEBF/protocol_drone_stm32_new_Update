@@ -1,0 +1,32 @@
+/*
+ * uart.c
+ *
+ *  Created on: Aug 9, 2025
+ *      Author: duong
+ */
+#include "uart.h"
+#include "ring_buff.h"
+#define RING_UART_LEN 10000
+Ring_buff_t ring;
+uint8_t buff[RING_UART_LEN];
+
+void receive_rx(uint8_t data_rx)
+{
+	ring_buffer_push(&ring, data_rx);
+}
+
+uint16_t uart_available(void)
+{
+	return ring_buffer_available(&ring);
+}
+uint8_t uart_read(void)
+{
+	uint8_t data_pop;
+	ring_buffer_pop(&ring, &data_pop);
+	return data_pop;
+}
+
+void uart_init(void)
+{
+	ring_buffer_init(&ring, buff, RING_UART_LEN);
+}

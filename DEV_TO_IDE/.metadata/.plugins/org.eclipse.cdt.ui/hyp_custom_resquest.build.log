@@ -1,0 +1,10 @@
+16:01:06 **** Incremental Build of configuration Debug for project hyp_custom_resquest ****
+make -j12 all 
+arm-none-eabi-size  hyp_custom_resquest.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20672	     12	   2876	  23560	   5c08	hyp_custom_resquest.elf
+Finished building: default.size.stdout
+ 
+
+16:01:06 Build Finished. 0 errors, 0 warnings. (took 144ms)
+

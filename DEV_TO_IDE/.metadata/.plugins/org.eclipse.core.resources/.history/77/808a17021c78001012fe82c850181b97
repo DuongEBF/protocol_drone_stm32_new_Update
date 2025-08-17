@@ -1,0 +1,21 @@
+/*
+ * uart_irq.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "uart_irq.h"
+uint8_t data_rx_fc;
+uint8_t data_rx_tobufi;
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance == USART3)
+	{
+		receive_rx(data_rx_fc);
+		HAL_UART_Receive_IT(huart, &data_rx_fc, 1);
+	}
+	if(huart->Instance == USART2)
+	{
+		HAL_UART_Receive_IT(huart, &data_rx_tobufi, 1);
+	}
+}

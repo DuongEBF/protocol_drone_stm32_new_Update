@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.dynamic_node_id.server.AppendEntries_res.h:59:6:_uavcan_protocol_dynamic_node_id_server_AppendEntriesResponse_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.dynamic_node_id.server.AppendEntries_res.h:93:6:_uavcan_protocol_dynamic_node_id_server_AppendEntriesResponse_decode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.dynamic_node_id.server.AppendEntries_res.c:12:10:uavcan_protocol_dynamic_node_id_server_AppendEntriesResponse_encode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.dynamic_node_id.server.AppendEntries_res.c:32:6:uavcan_protocol_dynamic_node_id_server_AppendEntriesResponse_decode	2

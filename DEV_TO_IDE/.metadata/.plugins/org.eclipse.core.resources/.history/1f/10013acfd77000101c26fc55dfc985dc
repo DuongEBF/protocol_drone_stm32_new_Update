@@ -1,0 +1,257 @@
+#include "can.h"
+#define CLEAR_MSB_8BIT 0x00FF
+CAN_HandleTypeDef* can_src;
+uint8_t canard_memory_pool[1024];
+CanardInstance canard;
+uint8_t tid_batt = 0;
+uint8_t tid_cryp = 0;
+uint32_t timeup_sec = 0;
+typedef enum
+{
+	STATE_FIND = 0,
+	STATE_CONNECTED,
+}can_link_state_t;
+can_link_state_t link_state = STATE_FIND;
+
+
+
+uint32_t last_batt_request_time = 0;
+#define BATT_REQUEST_INTERVAL 500
+bool batt_response_received = true;
+
+uint32_t last_find_time = 0;
+#define FIND_REQUEST_INTERVAL 300
+
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+    CAN_RxHeaderTypeDef rxHeader;
+    uint8_t rxData[8];
+    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rxHeader, rxData) == HAL_OK) {
+        CanardCANFrame frame;
+        frame.id = rxHeader.ExtId;
+        if (rxHeader.IDE == CAN_ID_EXT)
+            frame.id |= (1UL << 31);
+
+        frame.data_len = rxHeader.DLC;
+        memcpy(frame.data, rxData, rxHeader.DLC);
+        frame.iface_id = 0;
+
+        canardHandleRxFrame(&canard, &frame, HAL_GetTick() * 1000ULL);
+    }
+}
+
+static void send_batteryinfo_request(CanardInstance* ins, uint8_t* transfer_id, uint8_t des_node_id)
+{
+	struct hyp_msg_BatteryStatus_Hyp msg;
+	memset(&msg, 0, sizeof(msg));
+	msg.current = 2;
+	msg.voltage = 24;
+	msg.state_of_charge_percent = 77;
+	msg.name.len = strlen("BATT_INFOR");
+	memcpy(msg.name.data, "BATT_INFOR", msg.name.len);
+
+	uint8_t buffer[HYP_MSG_BATTERYSTATUS_HYP_MAX_SIZE];
+	uint32_t len = hyp_msg_BatteryStatus_Hyp_encode(&msg, buffer
+#if CANARD_ENABLE_TAO_OPTION
+        , true
+#endif
+    );
+	canardRequestOrRespond(
+					ins,
+					des_node_id,
+					HYP_MSG_BATTERYSTATUS_HYP_SIGNATURE,
+					HYP_MSG_BATTERYSTATUS_HYP_ID,
+					transfer_id,
+					CANARD_TRANSFER_PRIORITY_HIGHEST,
+					CanardRequest,
+					buffer,
+					len
+					);
+}
+
+bool should_accept(const CanardInstance* ins, uint64_t* out_sig, uint16_t data_type_id,
+                   CanardTransferType transfer_type, uint8_t source_node_id)
+{
+	if (transfer_type == CanardTransferTypeResponse)
+	{
+		switch (data_type_id)
+		{
+			case HYP_AES_ENCRYPTION_HYP_ID:
+			{
+				*out_sig = HYP_AES_ENCRYPTION_HYP_SIGNATURE;
+				return true;
+			}
+			case HYP_MSG_BATTERYSTATUS_HYP_ID & CLEAR_MSB_8BIT:
+			{
+				*out_sig = HYP_MSG_BATTERYSTATUS_HYP_SIGNATURE;
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+static void recv_decode_Encryption(CanardRxTransfer* transfer)
+{
+	struct hyp_aes_Encryption_Hyp pkt;
+	hyp_aes_Encryption_Hyp_decode(transfer, &pkt);
+	char buff_resp[50] = {0};
+	memcpy(buff_resp, pkt.name.data, pkt.name.len);
+	if(strcmp(buff_resp, "hyp_motion_ack__") == 0)
+	{
+		link_state = STATE_CONNECTED;
+
+		batt_response_received = true;
+		timeup_sec = HAL_GetTick();
+	}
+}
+
+void on_reception(CanardInstance* ins, CanardRxTransfer* transfer)
+{
+	if (transfer->transfer_type == CanardTransferTypeResponse)
+	{
+		switch (transfer->data_type_id)
+		{
+			case HYP_AES_ENCRYPTION_HYP_ID:
+			{
+				recv_decode_Encryption(transfer);
+				break;
+			}
+			case HYP_MSG_BATTERYSTATUS_HYP_ID & CLEAR_MSB_8BIT:
+			{
+				timeup_sec = HAL_GetTick();
+				batt_response_received = true;
+				break;
+			}
+		}
+	}
+}
+
+//------------------------------------encode--------------------------//
+static void find_Encryption(CanardInstance* ins, uint8_t* tid, uint8_t des_node_id)
+{
+	struct hyp_aes_Encryption_Hyp msg;
+	msg.name.len = strlen("connect");
+	memcpy(msg.name.data, "connect", msg.name.len);
+	msg.node_id = des_node_id;
+	uint8_t buffer[HYP_AES_ENCRYPTION_HYP_MAX_SIZE];
+	uint32_t len = hyp_aes_Encryption_Hyp_encode(&msg, buffer
+#if CANARD_ENABLE_TAO_OPTION
+        , true
+#endif
+    );
+	canardRequestOrRespond(
+			ins,
+			msg.node_id,
+			HYP_AES_ENCRYPTION_HYP_SIGNATURE,
+			HYP_AES_ENCRYPTION_HYP_ID,
+			tid,
+			CANARD_TRANSFER_PRIORITY_LOWEST,
+			CanardRequest,
+			buffer,
+			len);
+}
+static void tx_frame(void)
+{
+	CanardCANFrame* txf = NULL;
+	while ((txf = canardPeekTxQueue(&canard)) != NULL)
+	{
+		if (HAL_CAN_GetTxMailboxesFreeLevel(can_src) > 0)
+		{
+			CAN_TxHeaderTypeDef txHeader;
+			memset(&txHeader, 0, sizeof(txHeader));
+			txHeader.IDE = CAN_ID_EXT;
+			txHeader.ExtId = txf->id & 0x1FFFFFFF;
+			txHeader.RTR = CAN_RTR_DATA;
+			txHeader.DLC = txf->data_len;
+			txHeader.TransmitGlobalTime = DISABLE;
+
+			uint32_t txMailbox;
+			if (HAL_CAN_AddTxMessage(can_src, &txHeader, (uint8_t*)txf->data, &txMailbox) == HAL_OK)
+			{
+					canardPopTxQueue(&canard);
+			}
+			else
+			{
+					break;
+			}
+		}
+		else
+		{
+				break;
+		}
+	}
+	HAL_Delay(1);
+}
+static void config_filter(void)
+{
+		//------------filer-------------//
+	CAN_FilterTypeDef sFilterConfig;
+	sFilterConfig.FilterBank = 0;
+	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	sFilterConfig.FilterIdHigh = 0;
+	sFilterConfig.FilterIdLow  = 0;
+	sFilterConfig.FilterMaskIdHigh = 0;
+	sFilterConfig.FilterMaskIdLow  = 0;
+	sFilterConfig.FilterFIFOAssignment = CAN_FILTER_FIFO0;
+	sFilterConfig.FilterActivation = ENABLE;
+	HAL_CAN_ConfigFilter(can_src, &sFilterConfig);
+}
+void Can_Init(CAN_HandleTypeDef* can)
+{
+	can_src = can;
+	HAL_CAN_Start(can_src);
+	HAL_CAN_ActivateNotification(can_src, CAN_IT_RX_FIFO0_MSG_PENDING);
+	canardInit(&canard,
+	 canard_memory_pool,
+	 sizeof(canard_memory_pool),
+	 on_reception,
+	 should_accept,
+	 NULL);
+	canardSetLocalNodeID(&canard, 15);
+	config_filter();
+}
+void Can_Handle(void)
+{
+	if(HAL_GetTick() - timeup_sec >= 4000)
+	{
+		link_state = STATE_FIND;
+	}
+
+	// Cho phép gửi lại request nếu response không về sau 2 giây
+	if (!batt_response_received && HAL_GetTick() - last_batt_request_time > 2000)
+	{
+		batt_response_received = true;
+	}
+
+	switch(link_state)
+	{
+		case STATE_FIND:
+		{
+			if (HAL_GetTick() - last_find_time > FIND_REQUEST_INTERVAL)
+			{
+				find_Encryption(&canard, &tid_cryp, 11);
+				last_find_time = HAL_GetTick();
+			}
+			break;
+		}
+		case STATE_CONNECTED:
+		{
+			if (batt_response_received && HAL_GetTick() - last_batt_request_time > BATT_REQUEST_INTERVAL)
+			{
+				send_batteryinfo_request(&canard, &tid_batt, 11);
+				last_batt_request_time = HAL_GetTick();
+				batt_response_received = false;
+			}
+			break;
+		}
+		default:
+			break;
+	}
+
+	tx_frame();
+}
+
+

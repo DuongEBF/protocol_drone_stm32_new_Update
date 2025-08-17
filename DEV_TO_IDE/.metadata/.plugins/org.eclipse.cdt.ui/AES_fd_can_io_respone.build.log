@@ -1,0 +1,10 @@
+09:12:22 **** Incremental Build of configuration Debug for project AES_fd_can_io_respone ****
+make -j12 all 
+arm-none-eabi-size  AES_fd_can_io_respone.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21296	     12	   2772	  24080	   5e10	AES_fd_can_io_respone.elf
+Finished building: default.size.stdout
+ 
+
+09:12:22 Build Finished. 0 errors, 0 warnings. (took 141ms)
+

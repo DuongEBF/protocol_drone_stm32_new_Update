@@ -1,0 +1,14 @@
+../Core/Src/main.c:93:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/main.c:102:6:crsf_poll_ringbuf_and_parse	16	static
+../Core/Src/main.c:138:6:send_crsf_battery	40	static
+../Core/Src/main.c:171:6:send_crsf_heartbeat	32	static
+../Core/Src/main.c:189:6:crsf_process_frame	56	static
+../Core/Src/main.c:208:6:send_crsf_rc_channels	72	static
+../Core/Src/main.c:240:6:HAL_TIM_PeriodElapsedCallback	24	static
+../Core/Src/main.c:254:5:main	16	static
+../Core/Src/main.c:338:6:SystemClock_Config	88	static
+../Core/Src/main.c:384:13:MX_TIM2_Init	32	static
+../Core/Src/main.c:429:13:MX_USART1_UART_Init	8	static
+../Core/Src/main.c:460:13:MX_DMA_Init	16	static
+../Core/Src/main.c:478:13:MX_GPIO_Init	40	static
+../Core/Src/main.c:513:6:Error_Handler	4	static,ignoring_inline_asm

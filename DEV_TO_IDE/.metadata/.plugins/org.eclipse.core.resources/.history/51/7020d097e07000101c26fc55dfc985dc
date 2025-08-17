@@ -1,0 +1,298 @@
+#include "can.h"
+#include "aes.h"
+FDCAN_HandleTypeDef* fdcan_src;
+uint8_t canard_memory_pool[1024];
+CanardInstance canard;
+uint16_t debug;
+#define CLEAR_MSB_8BIT 0x00FF
+typedef enum
+{
+	STATE_FIND = 0,
+	STATE_CONNECTED,
+	STATE_TIMEOUT,
+}can_link_state_t;
+can_link_state_t link_state = STATE_FIND;
+uint8_t tid_cryp = 0;
+uint8_t tid_batt = 0;
+uint16_t v;
+int16_t i;
+uint8_t soc;
+uint32_t time_upsec = 0;
+
+struct AES_ctx ctx;
+const uint8_t key[16] = {
+    0x2b, 0x7e, 0x15, 0x16,
+    0x28, 0xae, 0xd2, 0xa6,
+    0xab, 0xf7, 0x05, 0x03,
+    0x2b, 0x7e, 0x15, 0x16
+};
+
+
+//---------------decode--------------------//
+void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t filterIndex)
+{
+	FDCAN_RxHeaderTypeDef rxHeader;
+	uint8_t rxData[8];
+	if (HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &rxHeader, rxData) != HAL_OK)
+			return;
+	CanardCANFrame frame;
+	frame.id = rxHeader.Identifier;
+	if (rxHeader.IdType == FDCAN_EXTENDED_ID)
+			frame.id |= (1UL << 31); // set extended bit
+	frame.data_len = rxHeader.DataLength;
+	if (frame.data_len > 8) frame.data_len = 8;
+
+	memcpy(frame.data, rxData, frame.data_len);
+	frame.iface_id = 0;
+
+	canardHandleRxFrame(&canard, &frame, HAL_GetTick() * 1000ULL);
+}
+
+
+static void recv_encode_packpin_ack(CanardInstance* ins, CanardRxTransfer* transfer)
+{
+	struct hyp_aes_Encryption_Hyp resq;
+	memset(&resq, 0, sizeof(resq));
+	const char* message = "hyp_motion_ack__";
+	memcpy(resq.data_plaintext_tiny, message, strlen(message));
+	AES_ECB_encrypt(&ctx, resq.data_plaintext_tiny);
+	memcpy(resq.data_ciphertext_tiny, resq.data_plaintext_tiny, 16);
+
+	memcpy(resq.data_plaintext_tiny, message, strlen(message));
+    resq.node_id = 15;
+    resq.valid = true;
+
+    const char* name_tag = "ack";
+    resq.name.len = strlen(name_tag);
+    memcpy(resq.name.data, name_tag, resq.name.len);
+
+
+	uint8_t buffer[HYP_AES_ENCRYPTION_HYP_MAX_SIZE];
+	uint32_t len = hyp_aes_Encryption_Hyp_encode(&resq, buffer
+#if CANARD_ENABLE_TAO_OPTION
+        , true
+#endif
+    );
+	canardRequestOrRespond(
+							ins,
+							resq.node_id,
+							HYP_AES_ENCRYPTION_HYP_SIGNATURE,
+							HYP_AES_ENCRYPTION_HYP_ID,
+							&tid_cryp,
+							CANARD_TRANSFER_PRIORITY_LOWEST,
+							CanardResponse,
+							buffer,
+							len);
+}
+static void recv_encode_packpin_batt(CanardInstance* ins, CanardRxTransfer* transfer, uint8_t des_node_id)
+{
+	uint8_t buffer[1] = {0};
+	canardRequestOrRespond(
+		ins,
+		des_node_id,
+		HYP_MSG_BATTERYSTATUS_HYP_SIGNATURE,
+		HYP_MSG_BATTERYSTATUS_HYP_ID,
+		&tid_batt,
+		CANARD_TRANSFER_PRIORITY_HIGHEST,
+		CanardResponse,
+		buffer,
+		0
+	);
+}
+static void recv_decode_packpin_cryp(CanardInstance* ins, CanardRxTransfer* transfer)
+{
+	struct hyp_aes_Encryption_Hyp resp;
+	hyp_aes_Encryption_Hyp_decode(transfer, &resp);
+
+    memcpy(resp.data_plaintext_tiny, resp.data_ciphertext_tiny, 16);
+    AES_ECB_decrypt(&ctx, resp.data_plaintext_tiny);
+
+    char decoded_msg[50] = {0};
+    memcpy(decoded_msg, resp.data_plaintext_tiny, 16);
+
+	if(strcmp(decoded_msg, "connect") == 0)
+	{
+		link_state = STATE_CONNECTED;
+		time_upsec = HAL_GetTick();
+
+		recv_encode_packpin_ack(ins, transfer);
+	}
+}
+
+static void recv_decode_packpin_batt(CanardInstance* ins, CanardRxTransfer* transfer)
+{
+	struct hyp_msg_BatteryStatus_Hyp resp_batt;
+	hyp_msg_BatteryStatus_Hyp_decode(transfer, &resp_batt);
+	char buff_resp[50] = {0};
+	i = resp_batt.current;
+	v = resp_batt.voltage;
+	soc = resp_batt.state_of_charge_percent;
+	memcpy(buff_resp, resp_batt.name.data, resp_batt.name.len);
+	if(strcmp(buff_resp, "BATT_INFOR") == 0)
+	{
+		recv_encode_packpin_batt(ins, transfer, 15);
+	}
+
+}
+bool should_accept(const CanardInstance* ins, uint64_t* out_sig, uint16_t data_type_id,
+                   CanardTransferType transfer_type, uint8_t source_node_id)
+{
+	if (transfer_type == CanardTransferTypeRequest)
+	{
+		debug = data_type_id;
+		switch (data_type_id)
+		{
+			case HYP_AES_ENCRYPTION_HYP_ID:
+			{
+				*out_sig = HYP_AES_ENCRYPTION_HYP_SIGNATURE;
+				return true;
+				break;
+			}
+			case HYP_MSG_BATTERYSTATUS_HYP_ID & CLEAR_MSB_8BIT:
+			{
+				*out_sig = HYP_MSG_BATTERYSTATUS_HYP_SIGNATURE;
+				return true;
+				break;
+			}
+		}
+	}
+	return false;
+}
+
+
+
+void on_reception(CanardInstance* ins, CanardRxTransfer* transfer)
+{
+	if (transfer->transfer_type == CanardTransferTypeRequest)
+	{
+		switch (transfer->data_type_id)
+		{
+			case HYP_AES_ENCRYPTION_HYP_ID:
+			{
+				if(link_state == STATE_FIND)
+				{
+					recv_decode_packpin_cryp(ins, transfer);
+					break;
+				}
+			}
+			case HYP_MSG_BATTERYSTATUS_HYP_ID & CLEAR_MSB_8BIT:
+			{
+				if(link_state == STATE_CONNECTED)
+				{
+					time_upsec = HAL_GetTick();
+					recv_decode_packpin_batt(ins, transfer);
+					break;
+				}
+
+			}
+		}
+	}
+}
+static void config_fdcan_filter_all(void)
+{
+    FDCAN_FilterTypeDef sFilterConfig;
+
+    sFilterConfig.IdType = FDCAN_STANDARD_ID;
+    sFilterConfig.FilterIndex = 0;
+    sFilterConfig.FilterType = FDCAN_FILTER_MASK;
+    sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
+    sFilterConfig.FilterID1 = 0x000;
+    sFilterConfig.FilterID2 = 0x000;
+    if (HAL_FDCAN_ConfigFilter(fdcan_src, &sFilterConfig) != HAL_OK)
+    {
+        Error_Handler();
+    }
+
+    sFilterConfig.IdType = FDCAN_EXTENDED_ID;
+    sFilterConfig.FilterIndex = 1;
+    sFilterConfig.FilterType = FDCAN_FILTER_MASK;
+    sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
+    sFilterConfig.FilterID1 = 0x00000000;
+    sFilterConfig.FilterID2 = 0x00000000;
+    if (HAL_FDCAN_ConfigFilter(fdcan_src, &sFilterConfig) != HAL_OK)
+    {
+        Error_Handler();
+    }
+}
+//---------------decode--------------------//
+
+
+
+//--------------------------encode------------------------//
+
+
+static void FDCan_tx_frame(void)
+{
+    const CanardCANFrame* txf;
+    while ((txf = canardPeekTxQueue(&canard)) != NULL)
+    {
+    	FDCAN_TxHeaderTypeDef txHeader;
+        if ((fdcan_src->Instance->TXFQS & FDCAN_TXFQS_TFQF) == 0) // TX FIFO not full
+        {
+            txHeader.Identifier = txf->id & 0x1FFFFFFF;
+            txHeader.IdType = FDCAN_EXTENDED_ID;
+            txHeader.TxFrameType = FDCAN_DATA_FRAME;
+            txHeader.DataLength = txf->data_len;
+            txHeader.FDFormat = FDCAN_CLASSIC_CAN;
+            txHeader.BitRateSwitch = FDCAN_BRS_OFF;
+            txHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
+            txHeader.MessageMarker = 0;
+
+            if (HAL_FDCAN_AddMessageToTxFifoQ(fdcan_src, &txHeader, (uint8_t*)txf->data) == HAL_OK)
+            {
+                canardPopTxQueue(&canard);
+            }
+            else
+            {
+                break;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+    HAL_Delay(1);
+}
+//--------------------------encode------------------------//
+
+
+//-----------------------Init------------------------//
+void FDCan_Init(FDCAN_HandleTypeDef* fdcan)
+{
+    fdcan_src = fdcan;
+
+    // Init CAN hardware
+    HAL_FDCAN_Start(fdcan_src);
+    HAL_FDCAN_ActivateNotification(fdcan_src, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
+    config_fdcan_filter_all();
+
+    // Init libcanard
+    canardInit(&canard,
+				canard_memory_pool,
+				sizeof(canard_memory_pool),
+				on_reception,
+				should_accept,
+				NULL);
+    canardSetLocalNodeID(&canard, 11);
+    AES_init_ctx(&ctx, key);
+}
+
+void FDCan_Handle(void)
+{
+	if(HAL_GetTick() - time_upsec >= 4000)
+	{
+		link_state = STATE_TIMEOUT;
+	}
+
+	if(link_state == STATE_TIMEOUT)
+	{
+		link_state = STATE_FIND;
+
+		// Quan trọng: reset các biến sau khi timeout
+		tid_cryp = 0;
+		tid_batt = 0;
+	}
+	FDCan_tx_frame();
+}
+//-----------------------Init------------------------//

@@ -1,0 +1,10 @@
+../Core/Src/main.c:77:6:HAL_CAN_RxFifo0MsgPendingCallback	3
+../Core/Src/main.c:95:6:should_accept	3
+../Core/Src/main.c:107:6:on_reception	4
+../Core/Src/main.c:135:6:tx_frame	4
+../Core/Src/main.c:168:6:config_filter	1
+../Core/Src/main.c:189:5:main	1
+../Core/Src/main.c:244:6:SystemClock_Config	3
+../Core/Src/main.c:290:13:MX_CAN1_Init	2
+../Core/Src/main.c:327:13:MX_GPIO_Init	1
+../Core/Src/main.c:351:6:Error_Handler	1

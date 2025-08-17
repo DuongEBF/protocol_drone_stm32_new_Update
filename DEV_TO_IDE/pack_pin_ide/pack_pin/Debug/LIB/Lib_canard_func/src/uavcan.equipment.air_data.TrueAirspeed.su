@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.equipment.air_data.TrueAirspeed.h:59:6:_uavcan_equipment_air_data_TrueAirspeed_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.equipment.air_data.TrueAirspeed.h:99:6:_uavcan_equipment_air_data_TrueAirspeed_decode	40	static
+../LIB/Lib_canard_func/src/uavcan.equipment.air_data.TrueAirspeed.c:12:10:uavcan_equipment_air_data_TrueAirspeed_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.equipment.air_data.TrueAirspeed.c:32:6:uavcan_equipment_air_data_TrueAirspeed_decode	24	static

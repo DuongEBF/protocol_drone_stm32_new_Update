@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/fd_can_hypcustom_respone/protocol/middleware/inlcude/hyp.msg.GetNodeInfor_Hyp_req.h:51:6:_hyp_msg_GetNodeInfor_HypRequest_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/fd_can_hypcustom_respone/protocol/middleware/inlcude/hyp.msg.GetNodeInfor_Hyp_req.h:67:6:_hyp_msg_GetNodeInfor_HypRequest_decode	1
+../protocol/middleware/src/hyp.msg.GetNodeInfor_Hyp_req.c:14:10:hyp_msg_GetNodeInfor_HypRequest_encode	1
+../protocol/middleware/src/hyp.msg.GetNodeInfor_Hyp_req.c:34:6:hyp_msg_GetNodeInfor_HypRequest_decode	2

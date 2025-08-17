@@ -1,0 +1,3 @@
+../App/uart.c:9:6:HAL_UART_RxCpltCallback	16	static
+../App/uart.c:21:6:uart_handle	32	static
+../App/uart.c:40:6:uart_init	16	static

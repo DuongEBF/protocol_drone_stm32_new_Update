@@ -1,0 +1,10 @@
+11:28:37 **** Incremental Build of configuration Debug for project f407_mavlink_failsafe ****
+make -j12 all 
+arm-none-eabi-size  f407_mavlink_failsafe.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21716	     16	   4560	  26292	   66b4	f407_mavlink_failsafe.elf
+Finished building: default.size.stdout
+ 
+
+11:28:37 Build Finished. 0 errors, 0 warnings. (took 141ms)
+

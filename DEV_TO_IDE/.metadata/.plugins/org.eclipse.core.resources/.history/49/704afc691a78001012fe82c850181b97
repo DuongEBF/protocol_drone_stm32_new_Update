@@ -1,0 +1,16 @@
+/*
+ * uart.h
+ *
+ *  Created on: Aug 9, 2025
+ *      Author: duong
+ */
+
+#ifndef UART_UART_H_
+#define UART_UART_H_
+#include "main.h"
+void receive_rx(uint8_t data_rx);
+void uart_init(void);
+uint8_t uart_read(void);
+uint16_t uart_available(void);
+
+#endif /* UART_UART_H_ */

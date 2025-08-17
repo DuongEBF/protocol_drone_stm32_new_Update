@@ -1,0 +1,6 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.actuator.Command.h:65:6:_uavcan_equipment_actuator_Command_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.actuator.Command.h:111:6:_uavcan_equipment_actuator_Command_decode	40	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.actuator.ArrayCommand.h:57:6:_uavcan_equipment_actuator_ArrayCommand_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.actuator.ArrayCommand.h:101:6:_uavcan_equipment_actuator_ArrayCommand_decode	48	static
+../LIB/Lib_canard_func/src/uavcan.equipment.actuator.ArrayCommand.c:12:10:uavcan_equipment_actuator_ArrayCommand_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.equipment.actuator.ArrayCommand.c:32:6:uavcan_equipment_actuator_ArrayCommand_decode	24	static

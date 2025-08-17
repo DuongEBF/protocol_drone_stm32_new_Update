@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.esc.RPMCommand.h:55:6:_uavcan_equipment_esc_RPMCommand_encode	3
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.esc.RPMCommand.h:102:6:_uavcan_equipment_esc_RPMCommand_decode	4
+../LIB/Lib_canard_func/src/uavcan.equipment.esc.RPMCommand.c:12:10:uavcan_equipment_esc_RPMCommand_encode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.esc.RPMCommand.c:32:6:uavcan_equipment_esc_RPMCommand_decode	2

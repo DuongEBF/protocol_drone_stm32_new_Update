@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.equipment.actuator.Status.h:77:6:_uavcan_equipment_actuator_Status_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.equipment.actuator.Status.h:153:6:_uavcan_equipment_actuator_Status_decode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.actuator.Status.c:12:10:uavcan_equipment_actuator_Status_encode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.actuator.Status.c:32:6:uavcan_equipment_actuator_Status_decode	2

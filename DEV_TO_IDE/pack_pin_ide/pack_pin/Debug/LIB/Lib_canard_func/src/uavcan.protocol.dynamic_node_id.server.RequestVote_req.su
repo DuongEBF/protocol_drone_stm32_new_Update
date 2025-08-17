@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.dynamic_node_id.server.RequestVote_req.h:63:6:_uavcan_protocol_dynamic_node_id_server_RequestVoteRequest_encode	24	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.dynamic_node_id.server.RequestVote_req.h:106:6:_uavcan_protocol_dynamic_node_id_server_RequestVoteRequest_decode	32	static
+../LIB/Lib_canard_func/src/uavcan.protocol.dynamic_node_id.server.RequestVote_req.c:14:10:uavcan_protocol_dynamic_node_id_server_RequestVoteRequest_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.protocol.dynamic_node_id.server.RequestVote_req.c:34:6:uavcan_protocol_dynamic_node_id_server_RequestVoteRequest_decode	24	static

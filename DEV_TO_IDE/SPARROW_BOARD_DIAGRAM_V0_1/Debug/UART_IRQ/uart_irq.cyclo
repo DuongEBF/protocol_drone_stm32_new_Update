@@ -1,0 +1,9 @@
+../UART_IRQ/uart_irq.c:19:6:HAL_UART_RxCpltCallback	3
+../UART_IRQ/uart_irq.c:34:6:receive_rx_fc	1
+../UART_IRQ/uart_irq.c:38:6:receive_rx_tobufi	1
+../UART_IRQ/uart_irq.c:44:10:uart_available_fc	1
+../UART_IRQ/uart_irq.c:48:10:uart_available_tobufi	1
+../UART_IRQ/uart_irq.c:54:9:uart_read_fc	1
+../UART_IRQ/uart_irq.c:60:9:uart_read_tobufi	1
+../UART_IRQ/uart_irq.c:68:6:uart_init_fc	1
+../UART_IRQ/uart_irq.c:73:6:uart_init_tobufi	1

@@ -1,0 +1,8 @@
+/*
+ * mavlink_from_FC.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "mavlink_from_FC.h"
+extern UART_HandleTypeDef huart3;

@@ -1,0 +1,18 @@
+!SESSION 2025-07-24 09:06:38.339 -----------------------------------------------
+eclipse.buildId=Version 1.19.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-07-24 09:07:31.993
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-07-24 09:07:31.993
+!MESSAGE Log4j2 initialized with config file /home/duong/Du_an/HYPMOTION/pack_pin_ide/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-07-24 09:07:34.854
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-07-24 09:11:39.286
+!MESSAGE Indexed 'pack_pin' (19 sources, 81 headers) in 2.31 sec: 4,423 declarations; 17,851 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.009%)

@@ -1,0 +1,10 @@
+11:41:28 **** Incremental Build of configuration Debug for project AES_hyp_custom_request ****
+make -j12 all 
+arm-none-eabi-size  AES_hyp_custom_request.elf 
+   text	   data	    bss	    dec	    hex	filename
+  24548	     28	   3084	  27660	   6c0c	AES_hyp_custom_request.elf
+Finished building: default.size.stdout
+ 
+
+11:41:28 Build Finished. 0 errors, 0 warnings. (took 132ms)
+

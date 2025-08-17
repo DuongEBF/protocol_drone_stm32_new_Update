@@ -1,0 +1,4 @@
+# pack-refs with: peeled fully-peeled sorted 
+f86c3ce9a491bf362e106684964646b7db0260ea refs/remotes/origin/master
+699a2b0df1b259a962a01af788e8306ee8d016d8 refs/remotes/origin/mavlink2
+4c1d6908ec90789d57a1ff40601885a78d8fba8e refs/remotes/origin/pr-param2_hacks

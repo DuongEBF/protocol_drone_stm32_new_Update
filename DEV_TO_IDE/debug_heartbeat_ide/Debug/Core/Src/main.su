@@ -1,0 +1,12 @@
+../Core/Src/main.c:73:6:HAL_CAN_RxFifo0MsgPendingCallback	80	static
+../Core/Src/main.c:93:6:should_accept	24	static
+../Core/Src/main.c:103:6:on_reception	832	static
+../Core/Src/main.c:144:6:send_heartbeat	72	static
+../Core/Src/main.c:168:6:send_battery_info	184	static
+../Core/Src/main.c:198:6:config_filter	48	static
+../Core/Src/main.c:215:6:tx_frame	40	static
+../Core/Src/main.c:253:5:main	16	static
+../Core/Src/main.c:320:6:SystemClock_Config	88	static
+../Core/Src/main.c:366:13:MX_CAN1_Init	8	static
+../Core/Src/main.c:403:13:MX_GPIO_Init	24	static
+../Core/Src/main.c:427:6:Error_Handler	4	static,ignoring_inline_asm

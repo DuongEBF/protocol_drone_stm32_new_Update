@@ -1,0 +1,8 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.indication.RGB565.h:53:6:_uavcan_equipment_indication_RGB565_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.indication.RGB565.h:96:6:_uavcan_equipment_indication_RGB565_decode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.indication.SingleLightCommand.h:73:6:_uavcan_equipment_indication_SingleLightCommand_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.indication.SingleLightCommand.h:104:6:_uavcan_equipment_indication_SingleLightCommand_decode	2
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.indication.LightsCommand.h:57:6:_uavcan_equipment_indication_LightsCommand_encode	3
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.indication.LightsCommand.h:101:6:_uavcan_equipment_indication_LightsCommand_decode	9
+../LIB/Lib_canard_func/src/uavcan.equipment.indication.LightsCommand.c:12:10:uavcan_equipment_indication_LightsCommand_encode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.indication.LightsCommand.c:32:6:uavcan_equipment_indication_LightsCommand_decode	2

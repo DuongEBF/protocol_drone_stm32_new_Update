@@ -1,0 +1,90 @@
+/*
+ * pid_controller.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "fan_controller.h"
+
+#include "../FAN_CONTROL/mavlink_from_tobufi.h"
+TIM_HandleTypeDef* pwmfan;
+mavlink_from_tobufi_t pPID;
+#define T_LIMIT       55.0f   // ngưỡng bảo vệ
+#define T_ON          40.0f   // bắt đầu mở quạt
+#define T_OFF         38.0f   // tắt khi xuống dưới
+#define DUTY_MIN      20.0f   // tối thiểu để quạt chắc chắn quay (4-wire ≥20%)
+#define SLEW_PER_CALL 5.0f    // tối đa đổi 5% mỗi lần gọi (gọi ~100 ms/lần)
+#define SPINUP_MS     300U    // bơm 100% lúc mới bật để khởi động
+static inline void fan_set_percent(uint8_t pct)
+{
+    if (!pwmfan) return;
+    if (pct > 100) pct = 100;
+    uint32_t arr = __HAL_TIM_GET_AUTORELOAD(pwmfan);
+    uint32_t ccr = (uint32_t)lroundf(((float)pct * (arr + 1U)) / 100.0f);
+    if (ccr > arr) ccr = arr;
+    __HAL_TIM_SET_COMPARE(pwmfan, TIM_CHANNEL_4, ccr);
+}
+
+static inline float clampf(float x, float lo, float hi)
+{
+    return (x < lo) ? lo : (x > hi) ? hi : x;
+}
+uint8_t fan_ctrl_limit(float tempC)
+{
+    static float duty = 0.0f;
+    static uint8_t fan_on = 0;
+    static uint32_t spin_until = 0;
+
+    if (!fan_on)
+    {
+        if (tempC >= T_ON)
+        {
+            fan_on = 1;
+            spin_until = HAL_GetTick() + SPINUP_MS;
+        }
+    }
+    else
+    {
+        if (tempC <= T_OFF) fan_on = 0;
+    }
+
+    float target;
+    if (!fan_on)
+    {
+        target = 0.0f;
+    } else if (HAL_GetTick() < spin_until)
+    {
+        target = 100.0f;                    // spin-up
+    }
+    else if (tempC >= T_LIMIT)
+    {
+        target = 100.0f;                    // chạm ngưỡng → full
+    }
+    else
+    {
+        const float slope = (100.0f - DUTY_MIN) / (T_LIMIT - T_ON);
+        target = DUTY_MIN + slope * (tempC - T_ON);
+    }
+
+    float step = target - duty;             // slew-rate
+    if (step >  SLEW_PER_CALL) step =  SLEW_PER_CALL;
+    if (step < -SLEW_PER_CALL) step = -SLEW_PER_CALL;
+    duty = clampf(duty + step, 0.0f, 100.0f);
+
+    return (uint8_t)lroundf(duty);
+}
+void fan_controller_init(TIM_HandleTypeDef* tim3)
+{
+	pwmfan = tim3;
+	mavlink_init_tbf();
+	HAL_TIM_PWM_Start(pwmfan, TIM_CHANNEL_4);
+}
+
+void fan_controller_process(void)
+{
+	mavlink_process_tbf(&pPID);
+    float tempC = pPID.char_infor.temperature;
+
+    uint8_t duty_pct = fan_ctrl_limit(tempC);
+    fan_set_percent(duty_pct);
+}

@@ -162,15 +162,14 @@ void send_heartbeat(CanardInstance* ins, uint8_t* transfer_id)
 void send_battery_info(void)
 {
     struct uavcan_equipment_power_BatteryInfo msg = {0};
-
-    // Tùy pack mà gán dúng tên:
-    const char* name = "hypmotion_pack_pin_1"; // ho?c _2, _3 tùy chip
+		
+    const char* name = "hypmotion_pack_pin_1";
     msg.temperature =  25;  // float
     msg.voltage =   22.211;      // float
     msg.current = 3.124;           // float
     msg.state_of_charge_pct = 77;         // uint8_t (0-100)
-    msg.state_of_health_pct = 100;                // ho?c tính n?u có
-    msg.status_flags = 0;                         // Xem hdsd d? báo tr?ng thái
+    msg.state_of_health_pct = 100;
+    msg.status_flags = 0;
 
     msg.model_name.len = strlen(name);
     memcpy(msg.model_name.data, name, msg.model_name.len);

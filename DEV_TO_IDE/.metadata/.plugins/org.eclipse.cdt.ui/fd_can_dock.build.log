@@ -1,0 +1,10 @@
+09:29:50 **** Incremental Build of configuration Debug for project fd_can_dock ****
+make -j12 all 
+arm-none-eabi-size  fd_can_dock.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20416	     16	   2880	  23312	   5b10	fd_can_dock.elf
+Finished building: default.size.stdout
+ 
+
+09:29:51 Build Finished. 0 errors, 0 warnings. (took 148ms)
+

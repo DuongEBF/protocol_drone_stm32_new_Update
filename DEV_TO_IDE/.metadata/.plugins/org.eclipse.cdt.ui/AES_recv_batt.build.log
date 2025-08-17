@@ -1,0 +1,231 @@
+00:45:50 **** Build of configuration Debug for project AES_recv_batt ****
+make -j12 all 
+arm-none-eabi-gcc "../tiny_lib/aes.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"tiny_lib/aes.d" -MT"tiny_lib/aes.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "tiny_lib/aes.o"
+arm-none-eabi-gcc "../cryp_lib/can.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"cryp_lib/can.d" -MT"cryp_lib/can.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "cryp_lib/can.o"
+arm-none-eabi-gcc "../cryp_lib/canard.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"cryp_lib/canard.d" -MT"cryp_lib/canard.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "cryp_lib/canard.o"
+arm-none-eabi-gcc "../cryp_lib/hyp.aes.Encryption_Hyp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"cryp_lib/hyp.aes.Encryption_Hyp.d" -MT"cryp_lib/hyp.aes.Encryption_Hyp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "cryp_lib/hyp.aes.Encryption_Hyp.o"
+arm-none-eabi-gcc "../cryp_lib/hyp.msg.BatteryStatus_Hyp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"cryp_lib/hyp.msg.BatteryStatus_Hyp.d" -MT"cryp_lib/hyp.msg.BatteryStatus_Hyp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "cryp_lib/hyp.msg.BatteryStatus_Hyp.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_fdcan.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_fdcan.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_fdcan.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_fdcan.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.o"
+In file included from ../cryp_lib/can.h:12,
+                 from ../cryp_lib/can.c:7:
+../cryp_lib/canard_internals.h:88:32: warning: 'traverseRxStates' declared 'static' but never defined [-Wunused-function]
+   88 | CANARD_INTERNAL CanardRxState* traverseRxStates(CanardInstance* ins,
+      |                                ^~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:91:32: warning: 'createRxState' declared 'static' but never defined [-Wunused-function]
+   91 | CANARD_INTERNAL CanardRxState* createRxState(CanardPoolAllocator* allocator,
+      |                                ^~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:94:32: warning: 'prependRxState' declared 'static' but never defined [-Wunused-function]
+   94 | CANARD_INTERNAL CanardRxState* prependRxState(CanardInstance* ins,
+      |                                ^~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:97:32: warning: 'findRxState' declared 'static' but never defined [-Wunused-function]
+   97 | CANARD_INTERNAL CanardRxState* findRxState(CanardInstance *ins,
+      |                                ^~~~~~~~~~~
+../cryp_lib/canard_internals.h:100:25: warning: 'bufferBlockPushBytes' declared 'static' but never defined [-Wunused-function]
+  100 | CANARD_INTERNAL int16_t bufferBlockPushBytes(CanardPoolAllocator* allocator,
+      |                         ^~~~~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:105:36: warning: 'createBufferBlock' declared 'static' but never defined [-Wunused-function]
+  105 | CANARD_INTERNAL CanardBufferBlock* createBufferBlock(CanardPoolAllocator* allocator);
+      |                                    ^~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:107:22: warning: 'pushTxQueue' declared 'static' but never defined [-Wunused-function]
+  107 | CANARD_INTERNAL void pushTxQueue(CanardInstance* ins,
+      |                      ^~~~~~~~~~~
+../cryp_lib/canard_internals.h:110:22: warning: 'isPriorityHigher' declared 'static' but never defined [-Wunused-function]
+  110 | CANARD_INTERNAL bool isPriorityHigher(uint32_t id,
+      |                      ^~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:113:36: warning: 'createTxItem' declared 'static' but never defined [-Wunused-function]
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.o"
+  113 | CANARD_INTERNAL CanardTxQueueItem* createTxItem(CanardPoolAllocator* allocator);
+      |                                    ^~~~~~~~~~~~
+../cryp_lib/canard_internals.h:115:22: warning: 'prepareForNextTransfer' declared 'static' but never defined [-Wunused-function]
+  115 | CANARD_INTERNAL void prepareForNextTransfer(CanardRxState* state);
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:117:25: warning: 'computeTransferIDForwardDistance' declared 'static' but never defined [-Wunused-function]
+  117 | CANARD_INTERNAL int16_t computeTransferIDForwardDistance(uint8_t a,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:120:22: warning: 'incrementTransferID' declared 'static' but never defined [-Wunused-function]
+  120 | CANARD_INTERNAL void incrementTransferID(uint8_t* transfer_id);
+      |                      ^~~~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:122:26: warning: 'releaseStatePayload' declared 'static' but never defined [-Wunused-function]
+  122 | CANARD_INTERNAL uint64_t releaseStatePayload(CanardInstance* ins,
+      |                          ^~~~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:125:26: warning: 'dlcToDataLength' declared 'static' but never defined [-Wunused-function]
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.o"
+  125 | CANARD_INTERNAL uint16_t dlcToDataLength(uint16_t dlc);
+      |                          ^~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:126:26: warning: 'dataLengthToDlc' declared 'static' but never defined [-Wunused-function]
+  126 | CANARD_INTERNAL uint16_t dataLengthToDlc(uint16_t data_length);
+      |                          ^~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:129:25: warning: 'enqueueTxFrames' declared 'static' but never defined [-Wunused-function]
+  129 | CANARD_INTERNAL int16_t enqueueTxFrames(CanardInstance* ins,
+      |                         ^~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:134:22: warning: 'copyBitArray' declared 'static' but never defined [-Wunused-function]
+  134 | CANARD_INTERNAL void copyBitArray(const uint8_t* src,
+      |                      ^~~~~~~~~~~~
+../cryp_lib/canard_internals.h:144:25: warning: 'descatterTransferPayload' declared 'static' but never defined [-Wunused-function]
+  144 | CANARD_INTERNAL int16_t descatterTransferPayload(const CanardRxTransfer* transfer,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:149:22: warning: 'isBigEndian' declared 'static' but never defined [-Wunused-function]
+  149 | CANARD_INTERNAL bool isBigEndian(void);
+      |                      ^~~~~~~~~~~
+../cryp_lib/canard_internals.h:151:22: warning: 'swapByteOrder' declared 'static' but never defined [-Wunused-function]
+  151 | CANARD_INTERNAL void swapByteOrder(void* data, unsigned size);
+      |                      ^~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:156:26: warning: 'crcAddByte' declared 'static' but never defined [-Wunused-function]
+  156 | CANARD_INTERNAL uint16_t crcAddByte(uint16_t crc_val,
+      |                          ^~~~~~~~~~
+../cryp_lib/canard_internals.h:159:26: warning: 'crcAddSignature' declared 'static' but never defined [-Wunused-function]
+  159 | CANARD_INTERNAL uint16_t crcAddSignature(uint16_t crc_val,
+      |                          ^~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:162:26: warning: 'crcAdd' declared 'static' but never defined [-Wunused-function]
+  162 | CANARD_INTERNAL uint16_t crcAdd(uint16_t crc_val,
+      |                          ^~~~~~
+../cryp_lib/canard_internals.h:173:22: warning: 'initPoolAllocator' declared 'static' but never defined [-Wunused-function]
+  173 | CANARD_INTERNAL void initPoolAllocator(CanardPoolAllocator* allocator,
+      |                      ^~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:180:23: warning: 'allocateBlock' declared 'static' but never defined [-Wunused-function]
+  180 | CANARD_INTERNAL void* allocateBlock(CanardPoolAllocator* allocator);
+      |                       ^~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:185:22: warning: 'freeBlock' declared 'static' but never defined [-Wunused-function]
+  185 | CANARD_INTERNAL void freeBlock(CanardPoolAllocator* allocator,
+      |                      ^~~~~~~~~
+../cryp_lib/canard_internals.h:188:26: warning: 'calculateCRC' declared 'static' but never defined [-Wunused-function]
+  188 | CANARD_INTERNAL uint16_t calculateCRC(const CanardTxTransfer* transfer_object);
+      |                          ^~~~~~~~~~~~
+../cryp_lib/canard_internals.h:190:36: warning: 'canardBufferFromIdx' declared 'static' but never defined [-Wunused-function]
+  190 | CANARD_INTERNAL CanardBufferBlock *canardBufferFromIdx(CanardPoolAllocator* allocator, canard_buffer_idx_t idx);
+      |                                    ^~~~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:192:37: warning: 'canardBufferToIdx' declared 'static' but never defined [-Wunused-function]
+  192 | CANARD_INTERNAL canard_buffer_idx_t canardBufferToIdx(CanardPoolAllocator* allocator, const CanardBufferBlock *buf);
+      |                                     ^~~~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:194:32: warning: 'canardRxFromIdx' declared 'static' but never defined [-Wunused-function]
+  194 | CANARD_INTERNAL CanardRxState *canardRxFromIdx(CanardPoolAllocator* allocator, canard_buffer_idx_t idx);
+      |                                ^~~~~~~~~~~~~~~
+../cryp_lib/canard_internals.h:196:37: warning: 'canardRxToIdx' declared 'static' but never defined [-Wunused-function]
+  196 | CANARD_INTERNAL canard_buffer_idx_t canardRxToIdx(CanardPoolAllocator* allocator, const CanardRxState *rx);
+      |                                     ^~~~~~~~~~~~~
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.d" -MT"Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32g4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32g4xx_hal_msp.d" -MT"Core/Src/stm32g4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32g4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32g4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32g4xx_it.d" -MT"Core/Src/stm32g4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32g4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32g4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G474xx -c -I../Core/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc -I../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/tiny_lib" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32g4xx.d" -MT"Core/Src/system_stm32g4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32g4xx.o"
+In file included from /media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/can.h:12,
+                 from ../Core/Src/main.c:24:
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:88:32: warning: 'traverseRxStates' declared 'static' but never defined [-Wunused-function]
+   88 | CANARD_INTERNAL CanardRxState* traverseRxStates(CanardInstance* ins,
+      |                                ^~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:91:32: warning: 'createRxState' declared 'static' but never defined [-Wunused-function]
+   91 | CANARD_INTERNAL CanardRxState* createRxState(CanardPoolAllocator* allocator,
+      |                                ^~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:94:32: warning: 'prependRxState' declared 'static' but never defined [-Wunused-function]
+   94 | CANARD_INTERNAL CanardRxState* prependRxState(CanardInstance* ins,
+      |                                ^~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:97:32: warning: 'findRxState' declared 'static' but never defined [-Wunused-function]
+   97 | CANARD_INTERNAL CanardRxState* findRxState(CanardInstance *ins,
+      |                                ^~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:100:25: warning: 'bufferBlockPushBytes' declared 'static' but never defined [-Wunused-function]
+  100 | CANARD_INTERNAL int16_t bufferBlockPushBytes(CanardPoolAllocator* allocator,
+      |                         ^~~~~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:105:36: warning: 'createBufferBlock' declared 'static' but never defined [-Wunused-function]
+  105 | CANARD_INTERNAL CanardBufferBlock* createBufferBlock(CanardPoolAllocator* allocator);
+      |                                    ^~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:107:22: warning: 'pushTxQueue' declared 'static' but never defined [-Wunused-function]
+  107 | CANARD_INTERNAL void pushTxQueue(CanardInstance* ins,
+      |                      ^~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:110:22: warning: 'isPriorityHigher' declared 'static' but never defined [-Wunused-function]
+  110 | CANARD_INTERNAL bool isPriorityHigher(uint32_t id,
+      |                      ^~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:113:36: warning: 'createTxItem' declared 'static' but never defined [-Wunused-function]
+  113 | CANARD_INTERNAL CanardTxQueueItem* createTxItem(CanardPoolAllocator* allocator);
+      |                                    ^~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:115:22: warning: 'prepareForNextTransfer' declared 'static' but never defined [-Wunused-function]
+  115 | CANARD_INTERNAL void prepareForNextTransfer(CanardRxState* state);
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:117:25: warning: 'computeTransferIDForwardDistance' declared 'static' but never defined [-Wunused-function]
+  117 | CANARD_INTERNAL int16_t computeTransferIDForwardDistance(uint8_t a,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:120:22: warning: 'incrementTransferID' declared 'static' but never defined [-Wunused-function]
+  120 | CANARD_INTERNAL void incrementTransferID(uint8_t* transfer_id);
+      |                      ^~~~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:122:26: warning: 'releaseStatePayload' declared 'static' but never defined [-Wunused-function]
+  122 | CANARD_INTERNAL uint64_t releaseStatePayload(CanardInstance* ins,
+      |                          ^~~~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:125:26: warning: 'dlcToDataLength' declared 'static' but never defined [-Wunused-function]
+  125 | CANARD_INTERNAL uint16_t dlcToDataLength(uint16_t dlc);
+      |                          ^~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:126:26: warning: 'dataLengthToDlc' declared 'static' but never defined [-Wunused-function]
+  126 | CANARD_INTERNAL uint16_t dataLengthToDlc(uint16_t data_length);
+      |                          ^~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:129:25: warning: 'enqueueTxFrames' declared 'static' but never defined [-Wunused-function]
+  129 | CANARD_INTERNAL int16_t enqueueTxFrames(CanardInstance* ins,
+      |                         ^~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:134:22: warning: 'copyBitArray' declared 'static' but never defined [-Wunused-function]
+  134 | CANARD_INTERNAL void copyBitArray(const uint8_t* src,
+      |                      ^~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:144:25: warning: 'descatterTransferPayload' declared 'static' but never defined [-Wunused-function]
+  144 | CANARD_INTERNAL int16_t descatterTransferPayload(const CanardRxTransfer* transfer,
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:149:22: warning: 'isBigEndian' declared 'static' but never defined [-Wunused-function]
+  149 | CANARD_INTERNAL bool isBigEndian(void);
+      |                      ^~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:151:22: warning: 'swapByteOrder' declared 'static' but never defined [-Wunused-function]
+  151 | CANARD_INTERNAL void swapByteOrder(void* data, unsigned size);
+      |                      ^~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:156:26: warning: 'crcAddByte' declared 'static' but never defined [-Wunused-function]
+  156 | CANARD_INTERNAL uint16_t crcAddByte(uint16_t crc_val,
+      |                          ^~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:159:26: warning: 'crcAddSignature' declared 'static' but never defined [-Wunused-function]
+  159 | CANARD_INTERNAL uint16_t crcAddSignature(uint16_t crc_val,
+      |                          ^~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:162:26: warning: 'crcAdd' declared 'static' but never defined [-Wunused-function]
+  162 | CANARD_INTERNAL uint16_t crcAdd(uint16_t crc_val,
+      |                          ^~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:173:22: warning: 'initPoolAllocator' declared 'static' but never defined [-Wunused-function]
+  173 | CANARD_INTERNAL void initPoolAllocator(CanardPoolAllocator* allocator,
+      |                      ^~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:180:23: warning: 'allocateBlock' declared 'static' but never defined [-Wunused-function]
+  180 | CANARD_INTERNAL void* allocateBlock(CanardPoolAllocator* allocator);
+      |                       ^~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:185:22: warning: 'freeBlock' declared 'static' but never defined [-Wunused-function]
+  185 | CANARD_INTERNAL void freeBlock(CanardPoolAllocator* allocator,
+      |                      ^~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:188:26: warning: 'calculateCRC' declared 'static' but never defined [-Wunused-function]
+  188 | CANARD_INTERNAL uint16_t calculateCRC(const CanardTxTransfer* transfer_object);
+      |                          ^~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:190:36: warning: 'canardBufferFromIdx' declared 'static' but never defined [-Wunused-function]
+  190 | CANARD_INTERNAL CanardBufferBlock *canardBufferFromIdx(CanardPoolAllocator* allocator, canard_buffer_idx_t idx);
+      |                                    ^~~~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:192:37: warning: 'canardBufferToIdx' declared 'static' but never defined [-Wunused-function]
+  192 | CANARD_INTERNAL canard_buffer_idx_t canardBufferToIdx(CanardPoolAllocator* allocator, const CanardBufferBlock *buf);
+      |                                     ^~~~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:194:32: warning: 'canardRxFromIdx' declared 'static' but never defined [-Wunused-function]
+  194 | CANARD_INTERNAL CanardRxState *canardRxFromIdx(CanardPoolAllocator* allocator, canard_buffer_idx_t idx);
+      |                                ^~~~~~~~~~~~~~~
+/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/cryp_lib/canard_internals.h:196:37: warning: 'canardRxToIdx' declared 'static' but never defined [-Wunused-function]
+  196 | CANARD_INTERNAL canard_buffer_idx_t canardRxToIdx(CanardPoolAllocator* allocator, const CanardRxState *rx);
+      |                                     ^~~~~~~~~~~~~
+arm-none-eabi-gcc -o "AES_recv_batt.elf" @"objects.list"   -mcpu=cortex-m4 -T"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/AES_recv_batt/STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AES_recv_batt.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: AES_recv_batt.elf
+ 
+arm-none-eabi-size  AES_recv_batt.elf 
+arm-none-eabi-objdump -h -S AES_recv_batt.elf  > "AES_recv_batt.list"
+   text	   data	    bss	    dec	    hex	filename
+  20740	     12	   4028	  24780	   60cc	AES_recv_batt.elf
+Finished building: default.size.stdout
+ 
+Finished building: AES_recv_batt.list
+ 
+
+00:45:51 Build Finished. 0 errors, 62 warnings. (took 867ms)
+

@@ -1,0 +1,6 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.tunnel.Protocol.h:55:6:_uavcan_tunnel_Protocol_encode	24	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.tunnel.Protocol.h:80:6:_uavcan_tunnel_Protocol_decode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.tunnel.Broadcast.h:65:6:_uavcan_tunnel_Broadcast_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.tunnel.Broadcast.h:127:6:_uavcan_tunnel_Broadcast_decode	40	static
+../LIB/Lib_canard_func/src/uavcan.tunnel.Broadcast.c:12:10:uavcan_tunnel_Broadcast_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.tunnel.Broadcast.c:32:6:uavcan_tunnel_Broadcast_decode	24	static

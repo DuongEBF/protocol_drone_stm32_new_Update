@@ -1,0 +1,27 @@
+--cpu Cortex-M0+
+"i2c_bq40z50\startup_stm32l071xx.o"
+"i2c_bq40z50\main.o"
+"i2c_bq40z50\stm32l0xx_it.o"
+"i2c_bq40z50\stm32l0xx_hal_msp.o"
+"i2c_bq40z50\stm32l0xx_hal_i2c.o"
+"i2c_bq40z50\stm32l0xx_hal_i2c_ex.o"
+"i2c_bq40z50\stm32l0xx_hal.o"
+"i2c_bq40z50\stm32l0xx_hal_rcc.o"
+"i2c_bq40z50\stm32l0xx_hal_rcc_ex.o"
+"i2c_bq40z50\stm32l0xx_hal_flash_ramfunc.o"
+"i2c_bq40z50\stm32l0xx_hal_flash.o"
+"i2c_bq40z50\stm32l0xx_hal_flash_ex.o"
+"i2c_bq40z50\stm32l0xx_hal_gpio.o"
+"i2c_bq40z50\stm32l0xx_hal_dma.o"
+"i2c_bq40z50\stm32l0xx_hal_pwr.o"
+"i2c_bq40z50\stm32l0xx_hal_pwr_ex.o"
+"i2c_bq40z50\stm32l0xx_hal_cortex.o"
+"i2c_bq40z50\stm32l0xx_hal_exti.o"
+"i2c_bq40z50\stm32l0xx_hal_tim.o"
+"i2c_bq40z50\stm32l0xx_hal_tim_ex.o"
+"i2c_bq40z50\system_stm32l0xx.o"
+"i2c_bq40z50\bq40z50.o"
+--strict --scatter "i2c_bq40z50\i2c_bq40z50.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "i2c_bq40z50.map" -o i2c_bq40z50\i2c_bq40z50.axf

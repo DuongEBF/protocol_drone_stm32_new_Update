@@ -1,0 +1,6 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.DataTypeKind.h:51:6:_uavcan_protocol_DataTypeKind_encode	24	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.DataTypeKind.h:76:6:_uavcan_protocol_DataTypeKind_decode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.GetDataTypeInfo_req.h:65:6:_uavcan_protocol_GetDataTypeInfoRequest_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.GetDataTypeInfo_req.h:127:6:_uavcan_protocol_GetDataTypeInfoRequest_decode	40	static
+../LIB/Lib_canard_func/src/uavcan.protocol.GetDataTypeInfo_req.c:14:10:uavcan_protocol_GetDataTypeInfoRequest_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.protocol.GetDataTypeInfo_req.c:34:6:uavcan_protocol_GetDataTypeInfoRequest_decode	24	static

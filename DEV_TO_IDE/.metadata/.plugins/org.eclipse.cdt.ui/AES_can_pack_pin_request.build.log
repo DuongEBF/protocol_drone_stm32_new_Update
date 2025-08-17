@@ -1,0 +1,10 @@
+09:11:56 **** Incremental Build of configuration Debug for project AES_can_pack_pin_request ****
+make -j12 all 
+arm-none-eabi-size  AES_can_pack_pin_request.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20608	     12	   2708	  23328	   5b20	AES_can_pack_pin_request.elf
+Finished building: default.size.stdout
+ 
+
+09:11:57 Build Finished. 0 errors, 0 warnings. (took 137ms)
+

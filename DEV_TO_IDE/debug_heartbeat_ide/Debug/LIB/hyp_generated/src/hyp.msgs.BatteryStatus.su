@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/hyp_generated/include/hyp.msgs.BatteryStatus.h:95:6:_hyp_msgs_BatteryStatus_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/hyp_generated/include/hyp.msgs.BatteryStatus.h:229:6:_hyp_msgs_BatteryStatus_decode	40	static
+../LIB/hyp_generated/src/hyp.msgs.BatteryStatus.c:12:10:hyp_msgs_BatteryStatus_encode	24	static
+../LIB/hyp_generated/src/hyp.msgs.BatteryStatus.c:32:6:hyp_msgs_BatteryStatus_decode	24	static

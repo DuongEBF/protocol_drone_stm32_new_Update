@@ -1,0 +1,39 @@
+/*
+ * mavlink_from_tobufi.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "mavlink_from_tobufi.h"
+#include "uart_irq.h"
+
+
+void mavlink_process(mavlink_from_fc_t* mav_fc, uint32_t now)
+{
+	if(uart_available_fc() > 0)
+	{
+		uint8_t read_data = uart_read_fc();
+		if (mavlink_parse_char(MAVLINK_COMM_0, read_data, &mav_fc->rx_msg, &mav_fc->status))
+		{
+			switch(mav_fc->rx_msg.msgid)
+			{
+				case MAVLINK_MSG_ID_HEARTBEAT:
+				{
+					mavlink_msg_heartbeat_decode(&mav_fc->rx_msg, &mav_fc->hb);
+					break;
+				}
+				case MAVLINK_MSG_ID_ATTITUDE:
+				{
+					mavlink_msg_attitude_decode(&mav_fc->rx_msg, &mav_fc->att);
+					mav_fc->att_last_ms = now;
+					break;
+				}
+			}
+		}
+	}
+}
+
+void mavlink_init(void)
+{
+	uart_init_tobufi();
+}

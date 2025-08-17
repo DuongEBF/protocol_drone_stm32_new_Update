@@ -15,13 +15,15 @@
 "pack_pin_2\stm32f1xx_hal_flash.o"
 "pack_pin_2\stm32f1xx_hal_flash_ex.o"
 "pack_pin_2\stm32f1xx_hal_exti.o"
+"pack_pin_2\stm32f1xx_hal_i2c.o"
 "pack_pin_2\stm32f1xx_hal_tim.o"
 "pack_pin_2\stm32f1xx_hal_tim_ex.o"
 "pack_pin_2\system_stm32f1xx.o"
 "pack_pin_2\canard.o"
+"pack_pin_2\uavcan.equipment.power.batteryinfo.o"
 "pack_pin_2\uavcan.protocol.getnodeinfo_res.o"
 "pack_pin_2\uavcan.protocol.nodestatus.o"
-"pack_pin_2\uavcan.equipment.power.batteryinfo.o"
+"pack_pin_2\bq40z50.o"
 --strict --scatter "pack_pin_2\pack_pin_2.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

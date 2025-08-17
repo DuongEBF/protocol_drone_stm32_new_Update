@@ -1,0 +1,4 @@
+../App/mixer.c:6:7:clamp	3
+../App/mixer.c:13:6:mixer_output	1
+../App/mixer.c:34:6:mixer_handle	1
+../App/mixer.c:41:6:mixer_init	1

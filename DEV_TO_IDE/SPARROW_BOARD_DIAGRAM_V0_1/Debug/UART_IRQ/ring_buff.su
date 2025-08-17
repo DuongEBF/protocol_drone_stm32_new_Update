@@ -1,0 +1,4 @@
+../UART_IRQ/ring_buff.c:8:6:ring_buffer_init	24	static
+../UART_IRQ/ring_buff.c:17:8:ring_buffer_push	24	static
+../UART_IRQ/ring_buff.c:33:10:ring_buffer_available	16	static
+../UART_IRQ/ring_buff.c:41:8:ring_buffer_pop	24	static

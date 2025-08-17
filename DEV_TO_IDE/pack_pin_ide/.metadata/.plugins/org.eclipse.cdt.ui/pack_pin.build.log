@@ -1,0 +1,10 @@
+10:08:56 **** Incremental Build of configuration Debug for project pack_pin ****
+make -j12 all 
+arm-none-eabi-size  pack_pin.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20160	     12	   2708	  22880	   5960	pack_pin.elf
+Finished building: default.size.stdout
+ 
+
+10:08:57 Build Finished. 0 errors, 0 warnings. (took 145ms)
+

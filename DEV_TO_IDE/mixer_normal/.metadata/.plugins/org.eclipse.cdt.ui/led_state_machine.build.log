@@ -1,0 +1,17 @@
+08:57:29 **** Incremental Build of configuration Debug for project led_state_machine ****
+make -j12 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I"/home/duong/HOC/ki2_nam4_2025/Laptrinh_tuhoc/STM32_IDE/App" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "led_state_machine.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/duong/HOC/ki2_nam4_2025/Laptrinh_tuhoc/STM32_IDE/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_state_machine.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_state_machine.elf
+ 
+arm-none-eabi-size  led_state_machine.elf 
+arm-none-eabi-objdump -h -S led_state_machine.elf  > "led_state_machine.list"
+   text	   data	    bss	    dec	    hex	filename
+  16732	    176	   2136	  19044	   4a64	led_state_machine.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_state_machine.list
+ 
+
+08:57:30 Build Finished. 0 errors, 0 warnings. (took 642ms)
+

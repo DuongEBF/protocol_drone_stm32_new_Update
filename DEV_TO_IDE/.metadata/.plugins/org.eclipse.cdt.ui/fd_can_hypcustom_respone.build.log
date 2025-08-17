@@ -1,0 +1,10 @@
+16:01:05 **** Incremental Build of configuration Debug for project fd_can_hypcustom_respone ****
+make -j12 all 
+arm-none-eabi-size  fd_can_hypcustom_respone.elf 
+   text	   data	    bss	    dec	    hex	filename
+  20520	     12	   2812	  23344	   5b30	fd_can_hypcustom_respone.elf
+Finished building: default.size.stdout
+ 
+
+16:01:05 Build Finished. 0 errors, 0 warnings. (took 138ms)
+

@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.SoftwareVersion.h:67:6:_uavcan_protocol_SoftwareVersion_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.SoftwareVersion.h:128:6:_uavcan_protocol_SoftwareVersion_decode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.SoftwareVersion.c:12:10:uavcan_protocol_SoftwareVersion_encode	1
+../LIB/Lib_canard_func/src/uavcan.protocol.SoftwareVersion.c:32:6:uavcan_protocol_SoftwareVersion_decode	2

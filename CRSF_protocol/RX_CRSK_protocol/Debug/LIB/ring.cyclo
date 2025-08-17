@@ -1,0 +1,3 @@
+../LIB/ring.c:4:12:RINGBUF_Init	3
+../LIB/ring.c:15:12:RINGBUF_Put	3
+../LIB/ring.c:29:12:RINGBUF_Get	3

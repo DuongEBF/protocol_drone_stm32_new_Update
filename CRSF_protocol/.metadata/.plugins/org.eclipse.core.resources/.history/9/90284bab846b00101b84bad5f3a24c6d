@@ -1,0 +1,526 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include "ring.h"
+#include "terseCRSF.h"
+#include <string.h>
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+#define UART_RX_BUF_SIZE 512
+#define CRSF_FRAME_MAX_LEN 64
+#define LED1_GPIO_Port GPIOD
+#define LED1_Pin GPIO_PIN_1
+#define LED2_GPIO_Port GPIOD
+#define LED2_Pin GPIO_PIN_2
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+RINGBUF uart_ring;
+uint8_t uart_rx_buf[UART_RX_BUF_SIZE];
+
+uint8_t crsf_buf[CRSF_FRAME_MAX_LEN];
+uint8_t crsf_index = 0;
+uint8_t crsf_frame_len = 0;
+
+volatile uint16_t joystick_raw[CRSF_MAX_CHANNELS];
+volatile int16_t joystick_pwm[CRSF_MAX_CHANNELS];
+
+uint8_t uart_rx_byte;
+int roll, pitch, yaw, throttle;
+
+volatile uint32_t last_rc_frame_tick = 0;
+volatile uint8_t link_connected = 0;
+
+HAL_StatusTypeDef status;
+HAL_StatusTypeDef status1;
+
+uint16_t channels[16] = {992, 992, 992, 992, 992, 992, 992, 992, 992, 992, 992, 992, 992, 992, 992, 992};
+
+crsf_battery_t g_battery;
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim2;
+
+UART_HandleTypeDef huart1;
+DMA_HandleTypeDef hdma_usart1_tx;
+
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
+static void MX_USART1_UART_Init(void);
+static void MX_TIM2_Init(void);
+/* USER CODE BEGIN PFP */
+void crsf_poll_ringbuf_and_parse(void);
+void crsf_process_frame(uint8_t* buf, uint8_t len);
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if (huart->Instance == USART1) {
+		RINGBUF_Put(&uart_ring, uart_rx_byte);
+		HAL_UART_Receive_IT(&huart1, &uart_rx_byte, 1);
+	}
+}
+
+void crsf_poll_ringbuf_and_parse(void)
+{
+	uint8_t b;
+	while (RINGBUF_Get(&uart_ring, &b) == RING_OK)
+	{
+		if (crsf_index == 0) {
+			if (b == 0xC8 || b == 0xEE) {
+				crsf_buf[crsf_index++] = b;
+				link_connected = 1;
+			}
+		}
+		else if (crsf_index == 1) {
+			crsf_buf[crsf_index++] = b;
+			crsf_frame_len = b + 2; // Type + payload + CRC
+			if (crsf_frame_len > CRSF_FRAME_MAX_LEN) {
+				crsf_index = 0;
+			}
+		}
+		else {
+			crsf_buf[crsf_index++] = b;
+			if (crsf_index >= crsf_frame_len) {
+				if (crsf_check_frame(crsf_buf, crsf_frame_len)) {
+					crsf_process_frame(crsf_buf, crsf_frame_len);
+				}
+				crsf_index = 0;
+				crsf_frame_len = 0;
+			}
+		}
+	}
+}
+void send_crsf_battery(UART_HandleTypeDef *huart, int voltage_mv, int current_ma, int capacity_mah, uint8_t percent)
+{
+    static uint8_t frame[12];
+    uint8_t idx = 0;
+
+    frame[idx++] = 0xC8;    // Sync (Flight Controller)
+    frame[idx++] = 0x08;    // Length (type+payload+crc = 1+6+1)
+    frame[idx++] = 0x08;    // Type: Battery
+
+    // Voltage: LSB = 10uV
+    int16_t v = voltage_mv / 10;  // 1mV = 100uV = 100/10 = 10uV
+    frame[idx++] = (v >> 8) & 0xFF;
+    frame[idx++] = v & 0xFF;
+
+    // Current: LSB = 10uA
+    int16_t c = current_ma * 100;  // 1mA = 100uA = 100*10uA
+    frame[idx++] = (c >> 8) & 0xFF;
+    frame[idx++] = c & 0xFF;
+
+    // Capacity used: uint24_t (mAh)
+    frame[idx++] = (capacity_mah >> 16) & 0xFF;
+    frame[idx++] = (capacity_mah >> 8) & 0xFF;
+    frame[idx++] = capacity_mah & 0xFF;
+
+    // Remaining percent
+    frame[idx++] = percent;
+
+    // CRC8 (t? TYPE d?n h?t PAYLOAD, t?c l� 1+6=7 bytes)
+    frame[idx++] = crsf_crc8_dvb_s2_sbuf_accum(&frame[2], 7);
+
+    status = HAL_UART_Transmit_DMA(huart, frame, idx);
+}
+
+void send_crsf_heartbeat(UART_HandleTypeDef *huart, uint16_t origin_addr)
+{
+    uint8_t frame[6];
+    uint8_t idx = 0;
+
+    frame[idx++] = 0xC8; // Sync byte
+    frame[idx++] = 0x03; // Length (type+payload+crc = 1+2+1)
+    frame[idx++] = 0x0B; // Type: Heartbeat
+
+    // Origin address (big endian)
+    frame[idx++] = (origin_addr >> 8) & 0xFF;
+    frame[idx++] = origin_addr & 0xFF;
+
+    // CRC8 (t? TYPE d?n h?t PAYLOAD, t?c l� 1+2=3 bytes)
+    frame[idx++] = crsf_crc8_dvb_s2_sbuf_accum(&frame[2], 3);
+
+    status1 = HAL_UART_Transmit(huart, frame, idx, 10);
+}
+void crsf_process_frame(uint8_t* buf, uint8_t len)
+{
+	if (buf[2] == 0x16 && len >= 25) {  // Frame RC Channel
+		uint16_t temp_channels[CRSF_MAX_CHANNELS] = {0};
+		crsf_decode_channels(&buf[3], temp_channels);
+		for (int i = 0; i < CRSF_MAX_CHANNELS; i++) {
+			joystick_raw[i] = temp_channels[i];
+			joystick_pwm[i] = ((joystick_raw[i] - 992) * 5 / 8) + 1500;
+			last_rc_frame_tick = HAL_GetTick(); // C?p nh?t th?i gian nh?n frame RC cu?i
+		}
+	}
+	else if (buf[2] == 0x08 && len >= 11) {
+    crsf_decode_battery(&buf[3], &g_battery);
+	}
+}
+
+void send_crsf_rc_channels(UART_HandleTypeDef *huart, uint16_t* channels)
+{
+    static uint8_t frame[26];
+    uint8_t idx = 0;
+    frame[idx++] = 0xC8;    // Device address (FC)
+    frame[idx++] = 0x18;    // Length: 24 bytes payload + 1 type + 1 crc = 26
+    frame[idx++] = 0x16;    // Type: RC Channels
+
+    // CRSF: 16 channels, m?i channel 11bit, pack l?i th�nh 22 bytes
+    uint8_t buf[22] = {0};
+    uint32_t bitbuffer = 0;
+    uint8_t bitlen = 0, bufidx = 0;
+    for (int i = 0; i < 16; i++) {
+        bitbuffer |= ((channels[i] & 0x07FF) << bitlen);
+        bitlen += 11;
+        while (bitlen >= 8) {
+            buf[bufidx++] = bitbuffer & 0xFF;
+            bitbuffer >>= 8;
+            bitlen -= 8;
+        }
+    }
+    // Copy 22 bytes RC channels
+    for (int i = 0; i < 22; i++) frame[idx++] = buf[i];
+
+    // CRC8 (type + 22 payload = 23 bytes)
+    frame[idx++] = crsf_crc8_dvb_s2_sbuf_accum(&frame[2], 23);
+
+    HAL_UART_Transmit_DMA(huart, frame, idx);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == TIM2)
+	{
+		//send_crsf_battery(&huart1, 11500, 1200, 400, 80);
+		//send_crsf_heartbeat(&huart1, 0xC8);
+	}
+}
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_USART1_UART_Init();
+  MX_TIM2_Init();
+  /* USER CODE BEGIN 2 */
+  RINGBUF_Init(&uart_ring, uart_rx_buf, UART_RX_BUF_SIZE);
+  HAL_UART_Receive_IT(&huart1, &uart_rx_byte, 1);
+  HAL_TIM_Base_Start_IT(&htim2);
+  uint32_t led_timer = 0;
+  uint8_t led_state = 0;
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+	crsf_poll_ringbuf_and_parse();
+
+	if (HAL_GetTick() - last_rc_frame_tick > 1000)
+	{
+		link_connected = 0;
+	}
+	else
+	{
+		link_connected = 1;
+	}
+	if (link_connected == 0)
+	{
+		if (HAL_GetTick() - led_timer > 200)
+		{
+			led_timer = HAL_GetTick();
+			led_state = !led_state;
+			if (led_state)
+			{
+				HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+				HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
+			}
+			else
+			{
+				HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+				HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
+			}
+		}
+	}
+	else
+	{
+		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
+	}
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+}
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+  /** Configure the main internal regulator output voltage
+  */
+  __HAL_RCC_PWR_CLK_ENABLE();
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  RCC_OscInitStruct.PLL.PLLM = 4;
+  RCC_OscInitStruct.PLL.PLLN = 168;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 7999;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 10499;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 420000;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream7_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
+
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+
+  /* USER CODE END MX_GPIO_Init_1 */
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, GPIO_PIN_1|GPIO_PIN_2, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PD1 PD2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+
+  /* USER CODE END MX_GPIO_Init_2 */
+}
+
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
+#ifdef USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* USER CODE BEGIN 6 */
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
+}
+#endif /* USE_FULL_ASSERT */

@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.power.BatteryInfo.h:133:6:_uavcan_equipment_power_BatteryInfo_encode	48	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.power.BatteryInfo.h:318:6:_uavcan_equipment_power_BatteryInfo_decode	56	static
+../LIB/Lib_canard_func/src/uavcan.equipment.power.BatteryInfo.c:12:10:uavcan_equipment_power_BatteryInfo_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.equipment.power.BatteryInfo.c:32:6:uavcan_equipment_power_BatteryInfo_decode	24	static

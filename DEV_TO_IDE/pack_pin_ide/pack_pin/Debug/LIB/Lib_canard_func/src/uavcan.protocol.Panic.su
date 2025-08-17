@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.Panic.h:61:6:_uavcan_protocol_Panic_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/pack_pin_ide/pack_pin/LIB/Lib_canard_func/include/uavcan.protocol.Panic.h:108:6:_uavcan_protocol_Panic_decode	40	static
+../LIB/Lib_canard_func/src/uavcan.protocol.Panic.c:12:10:uavcan_protocol_Panic_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.protocol.Panic.c:32:6:uavcan_protocol_Panic_decode	24	static

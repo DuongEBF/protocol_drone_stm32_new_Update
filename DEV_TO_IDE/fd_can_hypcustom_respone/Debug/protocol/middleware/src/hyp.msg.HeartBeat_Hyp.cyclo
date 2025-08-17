@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/fd_can_hypcustom_respone/protocol/middleware/inlcude/hyp.msg.HeartBeat_Hyp.h:97:6:_hyp_msg_HeartBeat_Hyp_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/fd_can_hypcustom_respone/protocol/middleware/inlcude/hyp.msg.HeartBeat_Hyp.h:158:6:_hyp_msg_HeartBeat_Hyp_decode	1
+../protocol/middleware/src/hyp.msg.HeartBeat_Hyp.c:12:10:hyp_msg_HeartBeat_Hyp_encode	1
+../protocol/middleware/src/hyp.msg.HeartBeat_Hyp.c:32:6:hyp_msg_HeartBeat_Hyp_decode	2

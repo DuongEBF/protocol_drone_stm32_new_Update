@@ -1,0 +1,38 @@
+/*
+ * uart_irq.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "uart_irq.h"
+#include "ring_buff.h"
+#define RING_UART_LEN_TOBUFI 512
+#define RING_UART_LEN_FC 512
+Ring_buff_t ring_tobufi;
+Ring_buff_t ring_fc;
+uint8_t data_rx_fc;
+uint8_t data_rx_tobufi;
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance == USART3)
+	{
+		ring_buffer_push(&ring_fc, data_rx_fc);
+		HAL_UART_Receive_IT(huart, &data_rx_fc, 1);
+	}
+	if(huart->Instance == USART2)
+	{
+		ring_buffer_push(&ring_tobufi, data_rx_tobufi);
+		HAL_UART_Receive_IT(huart, &data_rx_tobufi, 1);
+	}
+}
+void uart_init_fc(void)
+{
+	HAL_UART_Receive_IT(&huart3, &data_rx_fc, 1);
+	ring_buffer_init(&ring_fc, &data_rx_fc, RING_UART_LEN_FC);
+}
+void uart_init_tobufi(void)
+{
+	HAL_UART_Receive_IT(&huart2, &data_rx_tobufi, 1);
+	ring_buffer_init(&ring_tobufi, &data_rx_tobufi, RING_UART_LEN_TOBUFI);
+}
+

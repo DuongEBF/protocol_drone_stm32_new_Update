@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.ice.FuelTankStatus.h:73:6:_uavcan_equipment_ice_FuelTankStatus_encode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.ice.FuelTankStatus.h:143:6:_uavcan_equipment_ice_FuelTankStatus_decode	40	static
+../LIB/Lib_canard_func/src/uavcan.equipment.ice.FuelTankStatus.c:12:10:uavcan_equipment_ice_FuelTankStatus_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.equipment.ice.FuelTankStatus.c:32:6:uavcan_equipment_ice_FuelTankStatus_decode	24	static

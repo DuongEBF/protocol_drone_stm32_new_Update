@@ -1,0 +1,12 @@
+../LIB/terseCRSF.c:5:9:crsf_crc8_dvb_s2	24	static
+../LIB/terseCRSF.c:17:9:crsf_crc8_dvb_s2_sbuf_accum	32	static
+../LIB/terseCRSF.c:28:9:crsf_bytes2int32	16	static
+../LIB/terseCRSF.c:32:10:crsf_bytes2uint16	16	static
+../LIB/terseCRSF.c:35:9:crsf_bytes2int16	16	static
+../LIB/terseCRSF.c:40:6:crsf_decode_channels	40	static
+../LIB/terseCRSF.c:53:6:crsf_decode_gps	16	static
+../LIB/terseCRSF.c:61:6:crsf_decode_battery	16	static
+../LIB/terseCRSF.c:67:6:crsf_decode_attitude	16	static
+../LIB/terseCRSF.c:72:6:crsf_decode_linkstats	16	static
+../LIB/terseCRSF.c:86:10:crsf_wrap360	16	static
+../LIB/terseCRSF.c:95:6:crsf_check_frame	24	static

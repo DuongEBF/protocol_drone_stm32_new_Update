@@ -1,0 +1,5 @@
+../LED_CONTROL/led_controller.c:32:23:pulse_in_period	32	static
+../LED_CONTROL/led_controller.c:39:20:set_pin_if_changed	32	static
+../LED_CONTROL/led_controller.c:48:13:update_leds_by_mav_state	48	static
+../LED_CONTROL/led_controller.c:142:6:led_process	16	static
+../LED_CONTROL/led_controller.c:148:6:led_controller_init	16	static

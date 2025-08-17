@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="true"/>
+	</section>
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="/home/duong/Du_an/HYPMOTION/CRSF_protocol/RX_CRSK_protocol"/>
+			<item value="/home/duong/Du_an/HYPMOTION/CRSF_protocol/hypmotion_remote_handmade_f411_cpp_prj/hypmotion_remote_handmade_f411_cpp_lib"/>
+		</list>
+		<section name="SmartImportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="476"/>
+			<item key="DIALOG_Y_ORIGIN" value="70"/>
+			<item key="DIALOG_WIDTH" value="905"/>
+			<item key="DIALOG_HEIGHT" value="678"/>
+			<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
+		</section>
+		<section name="SW4STM32SmartImportWizard.dialogBounds">
+			<item key="DIALOG_X_ORIGIN" value="622"/>
+			<item key="DIALOG_Y_ORIGIN" value="174"/>
+			<item key="DIALOG_WIDTH" value="905"/>
+			<item key="DIALOG_HEIGHT" value="678"/>
+			<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
+		</section>
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="558"/>
+		<item key="DIALOG_Y_ORIGIN" value="310"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+</section>

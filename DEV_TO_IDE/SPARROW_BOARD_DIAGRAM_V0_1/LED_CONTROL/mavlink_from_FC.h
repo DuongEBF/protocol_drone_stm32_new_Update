@@ -1,0 +1,22 @@
+/*
+ * mavlink_from_FC.h
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+
+#ifndef MAVLINK_FROM_FC_H_
+#define MAVLINK_FROM_FC_H_
+#include "../../MAVLink_Custom/hypmotion_mavlink_custom/mavlink.h"
+typedef struct
+{
+	mavlink_message_t rx_msg;
+	mavlink_status_t status;
+	mavlink_heartbeat_t hb;
+    mavlink_attitude_t att;
+    uint32_t att_last_ms;
+}mavlink_from_fc_t;
+void mavlink_init(void);
+void mavlink_process(mavlink_from_fc_t* mav_fc, uint32_t now);
+
+#endif /* LED_CONTROLL_MAVLINK_FROM_FC_H_ */

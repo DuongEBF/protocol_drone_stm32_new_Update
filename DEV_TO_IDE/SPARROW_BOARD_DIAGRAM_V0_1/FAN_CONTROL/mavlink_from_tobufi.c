@@ -1,0 +1,34 @@
+/*
+ * mavlink_from_tobufi.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "../FAN_CONTROL/mavlink_from_tobufi.h"
+
+#include "uart_irq.h"
+
+
+void mavlink_process_tbf(mavlink_from_tobufi_t* char_infor)
+{
+	if(uart_available_tobufi() > 0)
+	{
+		uint8_t read_data = uart_read_tobufi();
+		if (mavlink_parse_char(MAVLINK_COMM_1, read_data, &char_infor->rx_msg, &char_infor->status))
+		{
+			switch(char_infor->rx_msg.msgid)
+			{
+				case MAVLINK_MSG_ID_chargingdock_bms:
+				{
+					mavlink_msg_chargingdock_bms_decode(&char_infor->rx_msg, &char_infor->char_infor);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void mavlink_init_tbf(void)
+{
+	uart_init_tobufi();
+}

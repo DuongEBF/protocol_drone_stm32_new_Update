@@ -1,0 +1,14 @@
+/*
+ * pid_controller.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "pid_controller.h"
+extern TIM_HandleTypeDef htim3;
+#define HILIM 0
+#define LOLIM 100
+#define Kp 2
+#define Kb 3
+#define Ki 0.2
+const float sampleTime = 0.1;

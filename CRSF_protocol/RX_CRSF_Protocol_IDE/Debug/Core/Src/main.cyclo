@@ -1,0 +1,14 @@
+../Core/Src/main.c:93:6:HAL_UART_RxCpltCallback	2
+../Core/Src/main.c:102:6:crsf_poll_ringbuf_and_parse	9
+../Core/Src/main.c:138:6:send_crsf_battery	1
+../Core/Src/main.c:171:6:send_crsf_heartbeat	1
+../Core/Src/main.c:189:6:crsf_process_frame	7
+../Core/Src/main.c:208:6:send_crsf_rc_channels	4
+../Core/Src/main.c:240:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:254:5:main	5
+../Core/Src/main.c:338:6:SystemClock_Config	3
+../Core/Src/main.c:384:13:MX_TIM2_Init	4
+../Core/Src/main.c:429:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:460:13:MX_DMA_Init	1
+../Core/Src/main.c:478:13:MX_GPIO_Init	1
+../Core/Src/main.c:513:6:Error_Handler	1

@@ -1,0 +1,10 @@
+16:56:16 **** Incremental Build of configuration Debug for project mixer_normal ****
+make -j12 all 
+arm-none-eabi-size  mixer_normal.elf 
+   text	   data	    bss	    dec	    hex	filename
+  31432	    468	   2220	  34120	   8548	mixer_normal.elf
+Finished building: default.size.stdout
+ 
+
+16:56:16 Build Finished. 0 errors, 0 warnings. (took 75ms)
+

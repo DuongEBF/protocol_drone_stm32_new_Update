@@ -1,0 +1,3 @@
+../Ringbuf/ring.c:4:12:RINGBUF_Init	24	static
+../Ringbuf/ring.c:15:12:RINGBUF_Put	24	static
+../Ringbuf/ring.c:29:12:RINGBUF_Get	16	static

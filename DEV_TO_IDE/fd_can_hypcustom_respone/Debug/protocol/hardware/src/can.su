@@ -1,0 +1,7 @@
+../protocol/hardware/src/can.c:7:6:HAL_FDCAN_RxFifo0Callback	104	static
+../protocol/hardware/src/can.c:26:6:should_accept	24	static
+../protocol/hardware/src/can.c:35:6:on_reception	184	static
+../protocol/hardware/src/can.c:62:13:config_fdcan_filter_all	32	static
+../protocol/hardware/src/can.c:89:13:FDCan_tx_frame	48	static
+../protocol/hardware/src/can.c:123:6:FDCan_Init	24	static
+../protocol/hardware/src/can.c:142:6:FDCan_Handle	8	static

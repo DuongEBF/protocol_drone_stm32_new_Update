@@ -1,0 +1,10 @@
+13:05:46 **** Incremental Build of configuration Debug for project hyp_custom_respone ****
+make -j12 all 
+arm-none-eabi-size  hyp_custom_respone.elf 
+   text	   data	    bss	    dec	    hex	filename
+  19348	     12	   2764	  22124	   566c	hyp_custom_respone.elf
+Finished building: default.size.stdout
+ 
+
+13:05:46 Build Finished. 0 errors, 0 warnings. (took 156ms)
+

@@ -1,0 +1,12 @@
+#hypmption_custom
+float16 temperature               # Temperature in °C
+uint16 voltage                    # Voltage in mV
+int16 current                     # Current in mA
+uint16 time_to_full              # Time to full (minutes)
+uint16 time_to_empty             # Time to empty (minutes)
+uint8 button                     # Button state
+uint8 is_charging                # Is charging flag
+uint8 adapter_power              # Power from adapter
+uint8[<=50] name                 # Device name (up to 50 chars)
+uint8 state_of_charge_percent    # SOC %
+uint8 full_charge_flag           # Full charge bit from BQ40Z50

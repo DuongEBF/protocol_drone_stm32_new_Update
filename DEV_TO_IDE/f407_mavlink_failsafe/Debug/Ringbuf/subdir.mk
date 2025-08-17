@@ -1,0 +1,27 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+# Toolchain: GNU Tools for STM32 (13.3.rel1)
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../Ringbuf/ring.c 
+
+OBJS += \
+./Ringbuf/ring.o 
+
+C_DEPS += \
+./Ringbuf/ring.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+Ringbuf/%.o Ringbuf/%.su Ringbuf/%.cyclo: ../Ringbuf/%.c Ringbuf/subdir.mk
+	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/f407_mavlink_failsafe/LIB/common" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/f407_mavlink_failsafe/LIB" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/f407_mavlink_failsafe/Ringbuf" -I"/media/duong/DataLinux/Du_an/HYPMOTION/DEV_TO_IDE/f407_mavlink_failsafe/UI" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
+
+clean: clean-Ringbuf
+
+clean-Ringbuf:
+	-$(RM) ./Ringbuf/ring.cyclo ./Ringbuf/ring.d ./Ringbuf/ring.o ./Ringbuf/ring.su
+
+.PHONY: clean-Ringbuf
+

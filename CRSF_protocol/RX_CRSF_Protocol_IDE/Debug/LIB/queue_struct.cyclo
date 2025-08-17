@@ -1,0 +1,6 @@
+../LIB/queue_struct.c:6:10:create_queue	1
+../LIB/queue_struct.c:17:13:isEmpty	1
+../LIB/queue_struct.c:20:13:isFull	1
+../LIB/queue_struct.c:25:13:enqueue	2
+../LIB/queue_struct.c:37:13:dequeue	2
+../LIB/queue_struct.c:48:6:free_queue	3

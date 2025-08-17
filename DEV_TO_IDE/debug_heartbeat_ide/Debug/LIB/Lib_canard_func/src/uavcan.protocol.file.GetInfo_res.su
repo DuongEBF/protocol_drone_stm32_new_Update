@@ -1,0 +1,8 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.file.EntryType.h:57:6:_uavcan_protocol_file_EntryType_encode	24	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.file.EntryType.h:82:6:_uavcan_protocol_file_EntryType_decode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.file.Error.h:67:6:_uavcan_protocol_file_Error_encode	24	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.file.Error.h:92:6:_uavcan_protocol_file_Error_decode	32	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.file.GetInfo_res.h:67:6:_uavcan_protocol_file_GetInfoResponse_encode	24	static
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.protocol.file.GetInfo_res.h:104:6:_uavcan_protocol_file_GetInfoResponse_decode	32	static
+../LIB/Lib_canard_func/src/uavcan.protocol.file.GetInfo_res.c:12:10:uavcan_protocol_file_GetInfoResponse_encode	24	static
+../LIB/Lib_canard_func/src/uavcan.protocol.file.GetInfo_res.c:32:6:uavcan_protocol_file_GetInfoResponse_decode	24	static

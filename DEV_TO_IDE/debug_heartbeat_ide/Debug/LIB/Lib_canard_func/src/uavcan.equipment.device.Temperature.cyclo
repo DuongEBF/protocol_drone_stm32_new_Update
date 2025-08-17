@@ -1,0 +1,4 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.device.Temperature.h:69:6:_uavcan_equipment_device_Temperature_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.device.Temperature.h:115:6:_uavcan_equipment_device_Temperature_decode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.device.Temperature.c:12:10:uavcan_equipment_device_Temperature_encode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.device.Temperature.c:32:6:uavcan_equipment_device_Temperature_decode	2

@@ -1,0 +1,152 @@
+/*
+ * led_controller.c
+ *
+ *  Created on: Aug 13, 2025
+ *      Author: duong
+ */
+#include "led_controller.h"
+#include "mavlink_from_FC.h"
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+mavlink_from_fc_t pLED;
+static GPIO_TypeDef* gpio = NULL;
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+/*< define */
+#define DISARM_TILT_DEG         40.0f
+#define ATT_VALID_MS            500
+// Tweakable timings (ms)
+#define UNINIT_HALF_PERIOD_MS   300   // -> 50% duty, 600 ms full period
+#define STANDBY_PERIOD_MS       1050
+#define STANDBY_ON_MS           50
+#define ACTIVE_HALF_PERIOD_MS   500   // -> alternate every 300 ms
+#define CRITICAL_HALF_PERIOD_MS 200   // -> 50% duty, 400 ms full period
+/* USER CODE END PD */
+/* ---------- Helpers ---------- */
+// Helper: compute ON window in a repeating period
+static inline uint8_t pulse_in_period(uint32_t now, uint32_t t0, uint16_t period_ms, uint16_t on_ms)
+{
+    uint32_t phase = (now - t0) % period_ms; // unsigned math -> overflow-safe
+    return (phase < on_ms) ? 1u : 0u;
+}
+
+// Helper: write only when a pin actually needs to change
+static inline void set_pin_if_changed(GPIO_TypeDef *port, uint16_t pin, uint8_t on, uint8_t *cached)
+{
+    if (on != *cached)
+    {
+        HAL_GPIO_WritePin(port, pin, on ? GPIO_PIN_SET : GPIO_PIN_RESET);
+        *cached = on;
+    }
+}
+
+static void update_leds_by_mav_state(uint8_t state, uint32_t now)
+{
+    // Cache last outputs to avoid redundant HAL writes
+    static uint8_t last_front_green = 0xFF, last_front_red = 0xFF;
+    static uint8_t last_rear_green  = 0xFF, last_rear_red  = 0xFF;
+
+    // Track when we entered the current state to restart patterns cleanly
+    static uint8_t  last_state      = 0xFF;
+    static uint32_t state_t0        = 0;
+
+    if (state != last_state)
+    {
+        last_state = state;
+        state_t0   = now;
+    }
+
+    // Front LEDs: constant according to your original logic
+    set_pin_if_changed(gpio, LED_FRONT_GEAR_GREEN_Pin, 1, &last_front_green);
+    set_pin_if_changed(gpio, LED_FRONT_GEAR_RED_Pin,   0, &last_front_red);
+
+    // Compute desired rear LED states for this frame
+    uint8_t rg = last_rear_green;  // default: keep previous if we don't handle the state
+    uint8_t rr = last_rear_red;
+    /* ---------- OVERRIDE: DISARM + TILT ---------- */
+    do {
+        static uint8_t tilt_override_last = 0;
+
+        const uint8_t is_armed = (pLED.hb.base_mode & MAV_MODE_FLAG_SAFETY_ARMED) ? 1 : 0;
+
+        const uint8_t att_fresh = (pLED.att_last_ms != 0) && ((now - pLED.att_last_ms) <= ATT_VALID_MS);
+
+        const float tilt_thresh_rad = DISARM_TILT_DEG * (float)M_PI / 180.0f;
+        const uint8_t is_tilted = (att_fresh &&
+                                  (fabsf(pLED.att.roll)  > tilt_thresh_rad ||
+                                   fabsf(pLED.att.pitch) > tilt_thresh_rad)) ? 1 : 0;
+
+        const uint8_t tilt_override = (!is_armed && is_tilted) ? 1 : 0;
+
+        if (tilt_override != tilt_override_last)
+        {
+            state_t0 = now;
+            tilt_override_last = tilt_override;
+        }
+
+        if (tilt_override)
+        {
+            rg = 0;
+            rr = pulse_in_period(now, state_t0, 2 * CRITICAL_HALF_PERIOD_MS, CRITICAL_HALF_PERIOD_MS);
+            set_pin_if_changed(gpio, LED_REAR_GEAR_GREEN_Pin, rg, &last_rear_green);
+            set_pin_if_changed(gpio, LED_REAR_GEAR_RED_Pin,   rr, &last_rear_red);
+            return;
+        }
+    } while (0);
+    /* --------------------------------------------- */
+    switch (state)
+    {
+		case MAV_STATE_UNINIT:
+		{
+			// Both rear blink together at 300 ms on/off (3.33 Hz)
+			rg = rr = pulse_in_period(now, state_t0, 2 * UNINIT_HALF_PERIOD_MS, UNINIT_HALF_PERIOD_MS);
+			break;
+		}
+		case MAV_STATE_STANDBY:
+		{
+			// Short green pulse (50 ms) every 1050 ms, red off
+			rg = pulse_in_period(now, state_t0, STANDBY_PERIOD_MS, STANDBY_ON_MS);
+			rr = 0;
+			break;
+		}
+		case MAV_STATE_ACTIVE:
+		{
+			// Alternate green/red every 300 ms
+			uint8_t first_half = pulse_in_period(now, state_t0, 2 * ACTIVE_HALF_PERIOD_MS, ACTIVE_HALF_PERIOD_MS);
+			rg = first_half;
+			rr = !first_half;
+			break;
+		}
+		default:
+			if (state >= MAV_STATE_CRITICAL)
+			{
+				// Red blinks at 5 Hz (200 ms on/off), green off
+				rg = 0;
+				rr = pulse_in_period(now, state_t0, 2 * CRITICAL_HALF_PERIOD_MS, CRITICAL_HALF_PERIOD_MS);
+			}
+			// else: leave rear LEDs as they were (matches your original 'default' behavior)
+			break;
+    }
+
+    // Push rear outputs (only if they changed)
+    set_pin_if_changed(gpio, LED_REAR_GEAR_GREEN_Pin, rg, &last_rear_green);
+    set_pin_if_changed(gpio, LED_REAR_GEAR_RED_Pin,   rr, &last_rear_red);
+}
+
+
+void led_process(void)
+{
+	mavlink_process(&pLED, HAL_GetTick());
+	update_leds_by_mav_state(pLED.hb.system_status, HAL_GetTick());
+}
+
+void led_controller_init(GPIO_TypeDef* gpio_x)
+{
+	gpio = gpio_x;
+	mavlink_init();
+}
+
+
+

@@ -1,0 +1,6 @@
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.Timestamp.h:49:6:_uavcan_Timestamp_encode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.Timestamp.h:74:6:_uavcan_Timestamp_decode	1
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.ahrs.Solution.h:85:6:_uavcan_equipment_ahrs_Solution_encode	8
+/home/duong/Du_an/HYPMOTION/DEV_TO_IDE/debug_heartbeat_ide/LIB/Lib_canard_func/include/uavcan.equipment.ahrs.Solution.h:269:6:_uavcan_equipment_ahrs_Solution_decode	12
+../LIB/Lib_canard_func/src/uavcan.equipment.ahrs.Solution.c:12:10:uavcan_equipment_ahrs_Solution_encode	1
+../LIB/Lib_canard_func/src/uavcan.equipment.ahrs.Solution.c:32:6:uavcan_equipment_ahrs_Solution_decode	2

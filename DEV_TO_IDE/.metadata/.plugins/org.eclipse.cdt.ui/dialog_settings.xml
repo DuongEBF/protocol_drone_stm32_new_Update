@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="LastUsedSourceTemplate" value="Default C source template"/>
+	<item key="LastUsedHeaderTemplate" value="Default C header template"/>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+	<section name="CResourceRenameRefactoringInputPage">
+		<item key="updateReferences" value="true"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
+		<item key="DIALOG_X_ORIGIN" value="185"/>
+		<item key="DIALOG_Y_ORIGIN" value="190"/>
+		<item key="DIALOG_WIDTH" value="968"/>
+		<item key="DIALOG_HEIGHT" value="494"/>
+		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
+	</section>
+	<section name="NewSourceFileCreationWizard.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="622"/>
+		<item key="DIALOG_Y_ORIGIN" value="208"/>
+		<item key="DIALOG_WIDTH" value="613"/>
+		<item key="DIALOG_HEIGHT" value="500"/>
+		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
+	</section>
+	<section name="PDOMSearchPage">
+		<item key="caseSensitive" value="false"/>
+		<item key="searchFlags" value="227191"/>
+		<list key="previousPatterns">
+			<item value="CANARD_ENABLE_CANFD"/>
+		</list>
+	</section>
+	<section name="NewHeaderFileCreationWizard.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="622"/>
+		<item key="DIALOG_Y_ORIGIN" value="221"/>
+		<item key="DIALOG_WIDTH" value="613"/>
+		<item key="DIALOG_HEIGHT" value="452"/>
+		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
+	</section>
+	<section name="org.eclipse.cdt.internal.corext.codemanipulation">
+		<section name=".c">
+			<item key="id" value="org.eclipse.cdt.ui.text.codetemplates.csourcefile"/>
+			<item key="name" value="Default C source template"/>
+			<item key="contextId" value="org.eclipse.cdt.core.cSource.contenttype_context"/>
+		</section>
+		<section name=".h">
+			<item key="id" value="org.eclipse.cdt.ui.text.codetemplates.cheaderfile"/>
+			<item key="name" value="Default C header template"/>
+			<item key="contextId" value="org.eclipse.cdt.core.cHeader.contenttype_context"/>
+		</section>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration.internal">
+		<item key="size.width" value="448"/>
+		<item key="size.height" value="180"/>
+	</section>
+</section>

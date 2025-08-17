@@ -1,0 +1,22 @@
+/*
+ * ring_buff.h
+ *
+ *  Created on: Aug 9, 2025
+ *      Author: duong
+ */
+
+#ifndef RING_BUFF_RING_BUFF_H_
+#define RING_BUFF_RING_BUFF_H_
+#include "main.h"
+typedef struct
+{
+	uint8_t* buffer;
+	uint16_t head;
+	uint16_t tail;
+	uint16_t maxlen;
+}Ring_buff_t;
+void ring_buffer_init(Ring_buff_t* ring_buff, uint8_t* buff, uint16_t len);
+int8_t ring_buffer_push(Ring_buff_t* ring_buff, uint8_t data);
+int8_t ring_buffer_pop(Ring_buff_t* ring_buff, uint8_t* data);
+uint16_t ring_buffer_available(Ring_buff_t* ring_buff);
+#endif /* RING_BUFF_RING_BUFF_H_ */

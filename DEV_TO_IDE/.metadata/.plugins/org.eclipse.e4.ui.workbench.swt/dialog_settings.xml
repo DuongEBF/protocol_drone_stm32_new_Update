@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ShowViewDialog">
+		<item key="DIALOG_X_ORIGIN" value="739"/>
+		<item key="DIALOG_Y_ORIGIN" value="223"/>
+		<item key="DIALOG_WIDTH" value="379"/>
+		<item key="DIALOG_HEIGHT" value="449"/>
+		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
+		<item key="ShowViewDialog.STORE_SELECTED_VIEW_ID" value="org.eclipse.cdt.make.ui.views.MakeView"/>
+		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="C/C++"/>
+			<item value="Connections"/>
+			<item value="Debug"/>
+			<item value="Device Configuration Tool"/>
+			<item value="FreeRTOS"/>
+			<item value="Help"/>
+			<item value="Make"/>
+		</list>
+	</section>
+</section>
